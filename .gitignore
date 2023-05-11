@@ -1,0 +1,16 @@
+# Server files
+node_modules/
+dist/
+.env
+.env.local
+
+# Client files
+client/node_modules/
+client/build/
+client/.env
+client/.env.local
+
+# Common files
+*.log
+*.pid
+.DS_Store
