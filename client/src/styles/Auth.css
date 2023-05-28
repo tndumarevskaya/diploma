@@ -1,0 +1,34 @@
+.auth .header {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.auth-box form, h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #083D77;
+}
+
+form .shelter, .volunteer-adopter{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    align-items: center;
+    color: #083D77;
+}
+
+.auth-box {
+    padding-top: 70px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.auth-box h1{ 
+    padding-bottom: 40px;
+}
+
+.buttonEnter {
+    display: block;
+    margin-top: 36px;
+    margin-bottom: 60px;
+}

@@ -5,18 +5,20 @@ import { NOT_FOUND_PAGE, SHELTER_ROUTE, STARTPAGE_ROUTE } from '../utils/const';
 import { useSelector } from 'react-redux';
 
 const AppRouter = () => {
-    const shelter = useSelector(state => state.shelter);
-    const location = useLocation();
-    const isShelterRoute = location.pathname.startsWith("/shelter");
+    // const shelter = useSelector(state => state.shelter);
+    // const location = useLocation();
+    // const isShelterRoute = location.pathname.startsWith("/shelter");
     //const {user} = useContext(Context)
     const userType = "Shelter";
     //console.log(user)
     return (
         <Routes>
-            {shelter.isAuth && isShelterRoute && shelterRoutes.map(({path, Element}) =>
+            {
+            // shelter.isAuth && isShelterRoute && 
+            shelterRoutes.map(({path, Element}) =>
                 <Route key={path} path={path} element={Element} exact/>
             )}
-            {userType === "Vounteer" && volunteerRoutes.map(({path, Element}) =>
+            {volunteerRoutes.map(({path, Element}) =>
                 <Route key={path} path={path} element={Element} exact/>
             )}
             {publicRoutes.map(({path, Element}) =>

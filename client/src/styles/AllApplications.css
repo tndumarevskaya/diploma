@@ -1,0 +1,82 @@
+.all-applications {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	margin-right: 4%;
+}
+
+.all-applications button {
+	flex: 0.3;
+}
+
+.all-applications .search {
+	flex: 0.7;
+}
+
+.table-application {
+	flex: 1;
+    font-family: 'Unbounded', cursive;
+    font-weight: 400!important;
+    font-size: 16px;
+    margin-left: 4%;
+	width: 100%;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+}
+
+.table-application thead th {
+    text-align: center;
+	padding: 10px 15px;
+	background: #083D77;
+    color: white;
+}
+
+.table-application thead tr th:first-child {
+	border-radius: 20px 0 0 0;
+}
+
+.table-application thead tr th:last-child {
+	border-radius: 0 20px 0 0;
+}
+
+.table-application tbody td {
+    text-align: center;
+	padding: 30px 16px;
+}
+
+.table-application tbody tr:nth-child(even) {
+	background: #EBEBD3;
+}
+
+.table-application tbody tr {
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05); 
+}
+
+.application {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.modal {
+    background-color: white;
+    padding: 36px 120px 36px 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.application .modal-content {
+    display: flex;
+    gap: 10%;
+}

@@ -8,7 +8,7 @@ import shelterReducer from "./reducers/shelterReducer"
 
 const store = configureStore({
   reducer: {
-    shelter: shelterReducer,
+    //shelter: shelterReducer,
   }
 });
 

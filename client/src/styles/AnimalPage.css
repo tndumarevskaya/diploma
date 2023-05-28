@@ -1,0 +1,49 @@
+.animal-profile {
+    padding: 2% 12%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4%;
+}
+
+.animal-profile .animal-picture {
+    width: 280px;
+    height: 360px;
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+.characteristics-block {
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.characteristics-block > div {
+    flex: 0 0 calc(33.33% - 10px);
+    margin: 5px;
+}
+
+.animal-profile h3 {
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.animal-profile p {
+    font-size: 16px;
+}
+
+.animal-characteristics h2{
+    margin: 0;
+}
+
+.animal-characteristics {
+    flex: 50%;
+    align-self: center;
+
+}
+
+.animal-profile .buttons {
+    margin-top: 6%;
+    flex: 100%;
+    display: flex;
+    justify-content: space-around;
+}

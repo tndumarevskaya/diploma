@@ -1,0 +1,188 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.menu {
+    color: #D36135;
+    background-color: inherit;
+    border: none;
+    font-family: 'Unbounded', cursive;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+h1 {
+    font-family: 'Unbounded', cursive;
+    font-size: 48px;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    font-family: 'Unbounded', cursive;
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    font-family: 'Lora', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    font-family: 'Unbounded', cursive;
+    font-size: 26px;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 16px;
+    background-color: #083D77;
+    color: white;
+    align-self: center;
+}
+
+.second-button {
+    display: flex;
+    flex: 100%;
+    background-color: transparent;
+    color: #083D77;
+    font-family: 'Lora', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border-color: #083D77;
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.shelter-animal, .shelter-volunteer, .shelter-adopter, 
+.shelter-profile, .animal-page, .shelter-donation, 
+.volunteer-profile, .volunteer-shelter,
+.volunteer-chat-page, .volunteer-education-page {
+    background-image: url("../assets/dog_cat.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 320px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 16px;
+    background-color: #EBEBD3;
+    border-radius: 20px;
+}
+
+.search input {
+    margin: 0;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Unbounded', cursive;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.search button {
+    background-color: inherit;
+    color: #083D77;
+}
+
+.enter-message input {
+    margin: 0;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Unbounded', cursive;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.enter-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 16px;
+    background-color: #EBEBD3;
+    border-radius: 20px;
+}
+
+.enter-message button {
+    background-color: inherit;
+    color: #083D77;
+}
+
+.dropdown-menu {
+    position: relative;
+    width: fit-content;
+}
+
+.dropdown-menu button {
+    font-family: 'Unbounded', cursive;
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 10px;
+}
+  
+.dropdown-list {
+    position: absolute;
+    background-color: #083D77;
+    color: white;
+    list-style-type: none;
+    margin-top: 6px;
+    border-radius: 10px;
+    font-family: 'Unbounded', cursive;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0;
+    width: 100%;
+    border: 1px solid #083D77;
+    top: -1%;
+}
+  
+.dropdown-item {
+    border-radius: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+  
+.dropdown-item:hover {
+    background-color: white;
+    color: #083D77;
+}

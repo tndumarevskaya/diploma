@@ -1,0 +1,26 @@
+.profile-menu {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05); 
+}
+
+.profile-menu .menu {
+    padding-left: 12%;
+    display: flex;
+    gap: 6%;
+}
+
+.menu-item {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu-underline {
+    margin-top: 6px;
+    height: 9px;
+    border-radius: 100px;
+    background-color: #D36135;
+    margin-bottom: 1%;
+    /* transition: all 1s ease-out; */
+}

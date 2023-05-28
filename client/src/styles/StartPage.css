@@ -1,3 +1,51 @@
 .start-page {
-    background-image: url("../../public/sources/dog_cat.jpg");
+    background-image: url("../assets/dog_cat.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+.start-page h1 {
+    padding: 4%;
+    width: 64%;
+    align-self: center;
+    color: white;
+    text-align: center;
+}
+
+.buttons {
+    align-self: center;
+    display: flex;
+    gap: 61px;
+}
+
+.start-page .buttons button {
+    width: 270px;
+    height: 246px;
+    background-color: #083D77;
+    border: none;
+    color: white;
+    font-family: 'Unbounded', cursive;
+    font-size: 26px;
+    font-weight: 600;
+    border-radius: 40px;
+}
+
+.start-page .description {
+    margin-top: 88px;
+    background-color: #BDC5CC;
+    color: #083D77;
+    background-image: none !important;
+    text-align: justify;
+    padding: 64px 152px;
+}
+
+.start-page .description h2{
+    margin: 0;
+}
+
+.news {
+    display: flex;
+    flex-direction: column;
 }

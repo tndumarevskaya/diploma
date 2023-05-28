@@ -1,0 +1,73 @@
+.dialog-component {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+  
+.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 32px;
+    background-color: #EBEBD3;
+}
+  
+.dialog-header .second-button {
+    font-size: 20px;
+    margin: 0;
+    flex: 40%;
+}
+  
+.dialog-header .user-name {
+    font-size: 18px;
+    flex: 60%;
+    font-size: 24px;
+    font-weight: 600;
+    color: #083D77;
+}
+  
+.message-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+  
+.message-scroll {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+}
+  
+.enter-message {
+    margin: 10px 80px;
+    margin-top: 0;
+    margin-right: 200px;
+}
+
+.dialog-component .message{
+    box-shadow: none;
+    background-color: transparent;
+    margin-right: 100px;
+    /* flex-direction: column; */
+}
+
+.dialog-component .message .user-name, .info-block .is-read{
+    display: none;
+}
+
+.dialog-component .message img{
+    height: 60px;
+    width: 60px;
+}
+
+.dialog-component .message .text-message {
+    background-color: #EBEBD3;
+    padding: 6px 10px;
+    border-radius: 16px;
+    font-size: 14px;
+}
+
+
+.dialog-component .message .info-block {
+    display: inline;
+}
