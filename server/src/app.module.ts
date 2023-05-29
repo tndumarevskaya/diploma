@@ -7,9 +7,20 @@ import { UserModule } from "./user/user.module";
 import { UserTypeModule } from "./userType/userType.module";
 import { User, Volunteer, Adopter, Shelter } from "./user/user.model";
 import { UserType } from "./userType/userType.model";
+import { ChatModule } from './chat/chat.module';
+import { AnimalController } from './animal/animal.controller';
+import { AnimalModule } from './animal/animal.module';
+import { Animal } from "./animal/animal.model";
+import { Type } from "./animal/type/type.model";
+import { FavoriteModule } from './favorite/favorite.module';
+import { VolunteerApplicationModule } from './volunteer_application/volunteer_application.module';
+import { AdopterApplicationModule } from './adopter_application/adopter_application.module';
+import { DonationModule } from './donation/donation.module';
+import { EducationModule } from './education/education.module';
+import { ApplicationStatusModule } from './application_status/application_status.module';
 
 @Module({
-    controllers: [],
+    controllers: [AnimalController],
     providers: [],
     imports: [
         ConfigModule.forRoot({
@@ -23,12 +34,20 @@ import { UserType } from "./userType/userType.model";
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Volunteer, Adopter, Shelter, UserType],
+            models: [User, Volunteer, Adopter, Shelter, UserType, Animal, Type],
             autoLoadModels: true
         }),
         UserModule,
         UserTypeModule,
-        AuthModule
+        AuthModule,
+        ChatModule,
+        AnimalModule,
+        FavoriteModule,
+        VolunteerApplicationModule,
+        AdopterApplicationModule,
+        DonationModule,
+        EducationModule,
+        ApplicationStatusModule
     ]
 })
 
