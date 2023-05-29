@@ -5,6 +5,7 @@ import ProfileHeader from '../../components/ProfileHeader'
 import ProfileMenu from '../../components/ProfileMenu'
 import SearchComponent from '../../components/SearchComponent'
 import ShelterProfileComponent from '../../components/ShelterProfileComponent'
+import "../../styles/VolunteerShelterPage.css"
 
 export default function VolunteerShelterPage() {
   return (

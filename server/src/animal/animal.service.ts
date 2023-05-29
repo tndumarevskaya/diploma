@@ -30,6 +30,76 @@ export class AnimalService {
     return animals;
   }
 
+  async getAnimalsByName(name: string): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { name: name },
+    });
+    return animals;
+  }
+
+  async getAnimalsByType(typeId: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { typeId: typeId },
+    });
+    return animals;
+  }
+
+  async getAnimalsByAge(age: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { age: age },
+    });
+    return animals;
+  }
+
+  async getAnimalsByColor(colorId: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { colorId: colorId },
+    });
+    return animals;
+  }
+
+  async getAnimalsBySize(size: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { size: size },
+    });
+    return animals;
+  }
+
+  async getAnimalsByStatus(statusId: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { statusId: statusId },
+    });
+    return animals;
+  }
+
+  async getAnimalsByGender(genderId: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { genderId: genderId },
+    });
+    return animals;
+  }
+
+  async getAnimalsByCommunication(communicationId: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { communicationId: communicationId },
+    });
+    return animals;
+  }
+
+  async getAnimalsByFur(furId: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { furId: furId },
+    });
+    return animals;
+  }
+
+  async getAnimalsByBehavior(behaviorId: number): Promise<Animal[]> {
+    const animals = await this.animalModel.findAll({
+      where: { behaviorId: behaviorId },
+    });
+    return animals;
+  }
+
   async updateAnimal(id: number, updateAnimalDto: UpdateAnimalDto): Promise<Animal> {
     await this.animalModel.update(updateAnimalDto, {
       where: { animal_id: id },
