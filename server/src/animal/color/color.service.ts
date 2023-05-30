@@ -26,4 +26,8 @@ export class ColorService {
     async getAllColors(): Promise<Color[]> {
         return await this.colorModel.findAll();
     }
+
+    async getColorById(id: number): Promise<Color> {
+        return await this.colorModel.findByPk(id);
+    }
 }

@@ -13,6 +13,7 @@ import { UserService } from "./user.service";
 import { UserController } from "./user.controller";
 import { AuthModule } from "src/auth/auth.module";
 import { CheckRoleMiddleware } from "src/middleware/check.role.middleware";
+import { FileUploaderModule } from "src/file-uploader/file-uploader.module";
 
 @Module ({
     providers: [VolunteerService, AdopterService, ShelterService, UserService],
@@ -20,7 +21,8 @@ import { CheckRoleMiddleware } from "src/middleware/check.role.middleware";
     imports: [
         SequelizeModule.forFeature([User, Volunteer, Adopter, Shelter, UserType]),
         UserTypeModule,
-        AuthModule
+        AuthModule,
+        FileUploaderModule
     ],
     exports: [
         VolunteerService,
@@ -28,23 +30,24 @@ import { CheckRoleMiddleware } from "src/middleware/check.role.middleware";
         ShelterService,
         UserService
     ]
-  })
+})
 
-export class UserModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-      consumer
-        .apply(CheckRoleMiddleware)
-        .forRoutes('shelter*');
+export class UserModule {}
+// export class UserModule implements NestModule {
+//     configure(consumer: MiddlewareConsumer) {
+//       consumer
+//         .apply(CheckRoleMiddleware)
+//         .forRoutes('shelter*');
   
-      consumer
-        .apply(CheckRoleMiddleware)
-        .forRoutes('volunteer*');
+//       consumer
+//         .apply(CheckRoleMiddleware)
+//         .forRoutes('volunteer*');
   
-      consumer
-        .apply(CheckRoleMiddleware)
-        .forRoutes('adopter*');
-    }
-}
+//       consumer
+//         .apply(CheckRoleMiddleware)
+//         .forRoutes('adopter*');
+//     }
+// }
 
   
   

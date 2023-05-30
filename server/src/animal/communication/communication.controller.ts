@@ -12,7 +12,7 @@ export class CommunicationController {
 
     @ApiOperation({summary: 'Create communication'})
     @ApiResponse({status: 200, type: Communication})
-    @Post('/create')
+    @Post('')
     createCommunication(@Body() communicationDto: CreateCommunicationDto) {
         return this.communicationService.createCommunication(communicationDto);
     }
@@ -29,5 +29,12 @@ export class CommunicationController {
     @Get('/:value')
     getCommunicationByValue(@Param('value') value: string) {
         return this.communicationService.getCommunicationByValue(value);
+    }
+
+    @ApiOperation({summary: 'Get communication by id'})
+    @ApiResponse({status: 200, type: [Communication]})
+    @Get('/:id')
+    getCommunicationById(@Param('id') id: number) {
+        return this.communicationService.getCommunicationById(id);
     }
 }

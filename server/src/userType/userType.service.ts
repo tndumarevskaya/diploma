@@ -22,4 +22,8 @@ export class UserTypeService {
             }
         });
     }
+
+    async getUserTypeById(id: number): Promise<UserType> {
+        return await this.userTypeModel.findByPk(id);
+    }
 }

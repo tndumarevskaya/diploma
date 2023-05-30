@@ -6,13 +6,15 @@ import { UpdateShelterDto } from './dto/update-shelter.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { UserTypeService } from 'src/userType/userType.service';
 import { LoginShelterDto } from './dto/login-shelter.dto';
+import { FileUploaderService } from 'src/file-uploader/file-uploader.service';
 
 @Injectable()
 export class ShelterService {
 
     constructor(@InjectModel(Shelter) private shelterModel: typeof Shelter,
                             private userTypeService: UserTypeService,
-                            private authService: AuthService) {}
+                            private authService: AuthService,
+                            private fileUploaderService: FileUploaderService) {}
 
     async createShelter(dto: CreateShelterDto): Promise<string> {
         try {
@@ -91,8 +93,17 @@ export class ShelterService {
         });
     }
 
-    async updateShelter(id: number, updateShelterrDto: UpdateShelterDto): Promise<Shelter> {
+    async updateShelter(
+        id: number, 
+        updateShelterrDto: UpdateShelterDto,
+        imageFile?: Express.Multer.File
+      ): Promise<Shelter> {
         const shelter = await this.shelterModel.findByPk(id);
+
+        if (imageFile) {
+            const imageUrl = await this.fileUploaderService.uploadFile(imageFile);
+            shelter.image = imageUrl;
+        }
 
         if (updateShelterrDto.phoneNumber) {
             shelter.phoneNumber = updateShelterrDto.phoneNumber;

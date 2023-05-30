@@ -11,6 +11,11 @@ export class FavoriteService {
     return this.favoriteModel.create(createFavoriteDto);
   }
 
+  async getAllFavorite(adopterId?: number): Promise<Favorite[]> {
+    const whereCondition = adopterId ? { adopter_id: adopterId } : {};
+    return this.favoriteModel.findAll({ where: whereCondition });
+  }
+
   async deleteFavorite(id: number): Promise<void> {
     await this.favoriteModel.destroy({ where: { favorite_id: id } });
   }

@@ -12,7 +12,7 @@ export class FurController {
 
     @ApiOperation({summary: 'Create fur'})
     @ApiResponse({status: 200, type: Fur})
-    @Post('/create')
+    @Post('')
     createFur(@Body() furDto: CreateFurDto) {
         return this.furService.createFur(furDto);
     }
@@ -24,10 +24,17 @@ export class FurController {
         return this.furService.getAllFurs();
     }
 
-    @ApiOperation({summary: 'Get fuur by value'})
+    @ApiOperation({summary: 'Get fur by value'})
     @ApiResponse({status: 200, type: Fur})
     @Get('/:value')
     getFurByValue(@Param('value') value: string) {
         return this.furService.getFurByValue(value);
+    }
+
+    @ApiOperation({summary: 'Get fur by id'})
+    @ApiResponse({status: 200, type: [Fur]})
+    @Get('/:id')
+    getFurById(@Param('id') id: number) {
+        return this.furService.getFurById(id);
     }
 }

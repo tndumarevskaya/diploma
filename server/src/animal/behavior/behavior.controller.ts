@@ -12,7 +12,7 @@ export class BehaviorController {
 
     @ApiOperation({summary: 'Create behavior'})
     @ApiResponse({status: 200, type: Behavior})
-    @Post('/create')
+    @Post()
     createBehavior(@Body() behaviorDto: CreateBehaviorDto) {
         return this.behaviorService.createBehavior(behaviorDto);
     }
@@ -29,5 +29,12 @@ export class BehaviorController {
     @Get('/:value')
     getBehaviorByValue(@Param('value') value: string) {
         return this.behaviorService.getBehaviorByValue(value);
+    }
+
+    @ApiOperation({summary: 'Get behavior by id'})
+    @ApiResponse({status: 200, type: [Behavior]})
+    @Get('/:id')
+    getBehaviorById(@Param('id') id: number) {
+        return this.behaviorService.getBehaviorById(id);
     }
 }

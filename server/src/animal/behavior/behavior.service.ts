@@ -26,4 +26,8 @@ export class BehaviorService {
     async getAllBehaviors(): Promise<Behavior[]> {
         return await this.behaviorModel.findAll();
     }
+
+    async getBehaviorById(id: number): Promise<Behavior> {
+        return await this.behaviorModel.findByPk(id);
+    }
 }

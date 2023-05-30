@@ -1,8 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString, IsInt, Min, Max, IsPhoneNumber, Validate } from "class-validator";
+import { IsOptional, IsString, IsInt, Min, Max, IsPhoneNumber, Validate, IsUrl } from "class-validator";
 import { ScheduleValidator } from "src/pipes/shedule.validator.pipe";
 
 export class UpdateShelterDto {
+
+    @ApiProperty({ example: 'https://example.com/path/to/image.jpg', description: 'Image URL' })
+    @IsOptional()
+    @IsUrl({}, { message: 'Invalid image URL' })
+    readonly image?: string;
 
     @ApiProperty({example: 'Sostradanie NN', description: "Shelter's name"})
     @IsOptional()

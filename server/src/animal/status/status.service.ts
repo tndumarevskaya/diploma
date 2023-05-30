@@ -26,4 +26,8 @@ export class StatusService {
     async getAllStatuses(): Promise<Status[]> {
         return await this.statusModel.findAll();
     }
+
+    async getStatusById(id: number): Promise<Status> {
+        return await this.statusModel.findByPk(id);
+    }
 }

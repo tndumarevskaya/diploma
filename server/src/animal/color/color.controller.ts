@@ -12,7 +12,7 @@ export class ColorController {
 
     @ApiOperation({summary: 'Create color'})
     @ApiResponse({status: 200, type: Color})
-    @Post('/create')
+    @Post()
     createColor(@Body() colorDto: CreateColorDto) {
         return this.colorService.createColor(colorDto);
     }
@@ -29,5 +29,12 @@ export class ColorController {
     @Get('/:value')
     getColorByValue(@Param('value') value: string) {
         return this.colorService.getColorByValue(value);
+    }
+
+    @ApiOperation({summary: 'Get color by id'})
+    @ApiResponse({status: 200, type: [Color]})
+    @Get('/:id')
+    getColorById(@Param('id') id: number) {
+        return this.colorService.getColorById(id);
     }
 }

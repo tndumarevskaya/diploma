@@ -26,4 +26,8 @@ export class TypeService {
     async getAllTypes(): Promise<Type[]> {
         return await this.typeModel.findAll();
     }
+
+    async getTypeById(id: number): Promise<Type> {
+        return await this.typeModel.findByPk(id);
+    }
 }

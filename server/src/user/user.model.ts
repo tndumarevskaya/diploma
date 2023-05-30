@@ -36,6 +36,10 @@ export class User<T> extends Model<T, AdopterCreationAttrs | VolunteerCreationAt
     @Column({type: DataType.STRING, allowNull: false})
     password: string;
 
+    @ApiProperty({ example: 'https://example.com/images/cat.jpg', description: 'Image URL' })
+    @Column({ type: DataType.STRING, allowNull: true })
+    image: string;
+
     @ApiProperty({example: '79103976531', description: 'User phone number'})
     @Column({type: DataType.STRING})
     phoneNumber: string;

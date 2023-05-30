@@ -26,4 +26,8 @@ export class FurService {
     async getAllFurs(): Promise<Fur[]> {
         return await this.furModel.findAll();
     }
+
+    async getFurById(id: number): Promise<Fur> {
+        return await this.furModel.findByPk(id);
+    }
 }

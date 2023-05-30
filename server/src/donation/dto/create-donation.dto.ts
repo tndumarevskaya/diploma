@@ -7,10 +7,10 @@ export class CreateDonationDto {
   @IsNotEmpty()
   readonly name: string;
 
-  @ApiProperty({ example: '2023-03-01', description: 'Date of the donation' })
-  @IsDate()
-  @IsNotEmpty()
-  readonly date: Date;
+  // @ApiProperty({ example: '2023-03-01', description: 'Date of the donation' })
+  // @IsDate()
+  // @IsNotEmpty()
+  // readonly date: Date;
 
   @ApiProperty({ example: 2300, description: 'Amount of the donation in rubles' })
   @IsNumber()

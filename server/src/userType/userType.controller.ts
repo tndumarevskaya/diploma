@@ -15,4 +15,9 @@ export class UserTypeController {
     getByValue(@Param('value') value: string) {
         return this.userTypeService.getUserTypeByValue(value);
     }
+
+    @Get('/:id')
+    getById(@Param('id') id: number) {
+        return this.userTypeService.getUserTypeById(id);
+    }
 }

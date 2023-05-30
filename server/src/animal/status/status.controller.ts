@@ -12,7 +12,7 @@ export class StatusController {
 
     @ApiOperation({summary: 'Create status'})
     @ApiResponse({status: 200, type: Status})
-    @Post('/create')
+    @Post('')
     createStatus(@Body() statusDto: CreateStatusDto) {
         return this.statusService.createStatus(statusDto);
     }
@@ -29,5 +29,12 @@ export class StatusController {
     @Get('/:value')
     getStatusByValue(@Param('value') value: string) {
         return this.statusService.getStatusByValue(value);
+    }
+
+    @ApiOperation({summary: 'Get status by id'})
+    @ApiResponse({status: 200, type: [Status]})
+    @Get('/:id')
+    getStatusById(@Param('id') id: number) {
+        return this.statusService.getStatusById(id);
     }
 }

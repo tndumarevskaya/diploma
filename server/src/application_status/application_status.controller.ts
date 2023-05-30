@@ -12,7 +12,7 @@ export class ApplicationStatusController {
 
     @ApiOperation({summary: 'Create status'})
     @ApiResponse({status: 200, type: ApplicationStatus})
-    @Post('/create')
+    @Post()
     createStatus(@Body() statusDto: CreateStatusDto) {
         return this.statusService.createStatus(statusDto);
     }

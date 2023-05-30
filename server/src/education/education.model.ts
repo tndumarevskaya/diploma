@@ -1,8 +1,14 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 
-@Table({ tableName: 'education' })
-export class Education extends Model<Education> {
+export interface EducationCreationAttrs {
+  title: string;
+  text: string;
+  image: string;
+}
+
+@Table({ tableName: 'education', timestamps: false })
+export class Education extends Model<Education, EducationCreationAttrs> {
   @ApiProperty({ example: 1, description: 'Education ID' })
   @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   education_id: number;
@@ -12,6 +18,10 @@ export class Education extends Model<Education> {
   title: string;
 
   @ApiProperty({ example: 'Текст статьи', description: 'Text of the article' })
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.TEXT })
   text: string;
+
+  @ApiProperty({ example: 'https://example.com/images/cat.jpg', description: 'Image URL' })
+  @Column({ type: DataType.STRING, allowNull: true })
+  image: string;
 }

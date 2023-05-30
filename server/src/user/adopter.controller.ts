@@ -1,10 +1,11 @@
-import { Controller, Body, Post, Get, Param, UseGuards, Patch} from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Adopter } from './user.model';
 import { CreateAdopterDto } from './dto/create-adopter.dto';
 import { UpdateAdopterDto } from './dto/update-adopter.dto';
 import { AdopterService } from './adopter.service';
 import { LoginAdopterDto } from './dto/login-adopter.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 ApiTags("Adopter")
 @Controller('adopter')
@@ -55,7 +56,12 @@ export class AdopterController {
     }
 
     @Patch(':id')
-    updateAdopter(@Param('id') id: number, @Body() updateAdopterDto: UpdateAdopterDto) {
-        return this.adopterService.updateAdopter(id, updateAdopterDto);
+    @UseInterceptors(FileInterceptor('image'))
+    updateAdopter(
+        @Param('id') id: number,
+        @Body() updateAdopterDto: UpdateAdopterDto,
+        @UploadedFile() image: Express.Multer.File
+    ) {
+        return this.adopterService.updateAdopter(id, updateAdopterDto, image);
     }
 }

@@ -23,12 +23,17 @@ import { Fur } from './fur/fur.model';
 import { Communication } from './communication/communication.model';
 import { Color } from './color/color.model';
 import { Behavior } from './behavior/behavior.model';
+import { AnimalController } from './animal.controller';
+import { FileUploaderModule } from 'src/file-uploader/file-uploader.module';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
   providers: [AnimalService, TypeService, ColorService, StatusService, GenderService, CommunicationService, FurService, BehaviorService],
-  controllers: [AbortController, TypeController, ColorController, StatusController, GenderController, CommunicationController, FurController, BehaviorController],
+  controllers: [AnimalController, TypeController, ColorController, StatusController, GenderController, CommunicationController, FurController, BehaviorController],
   imports: [
     SequelizeModule.forFeature([Animal, Type, Status, Gender, Fur, Communication, Color, Behavior]),
+    FileUploaderModule,
+    UserModule,
   ],
   exports: [
     AnimalService,

@@ -26,4 +26,8 @@ export class CommunicationService {
     async getAllCommunications(): Promise<Communication[]> {
         return await this.communicationModel.findAll();
     }
+
+    async getCommunicationById(id: number): Promise<Communication> {
+        return await this.communicationModel.findByPk(id);
+    }
 }

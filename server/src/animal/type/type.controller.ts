@@ -12,7 +12,7 @@ export class TypeController {
 
     @ApiOperation({summary: 'Create type'})
     @ApiResponse({status: 200, type: Type})
-    @Post('/create')
+    @Post()
     createType(@Body() typeDto: CreateTypeDto) {
         return this.typeService.createType(typeDto);
     }
@@ -29,5 +29,12 @@ export class TypeController {
     @Get('/:value')
     getTypeByValue(@Param('value') value: string) {
         return this.typeService.getTypeByValue(value);
+    }
+
+    @ApiOperation({summary: 'Get type by id'})
+    @ApiResponse({status: 200, type: [Type]})
+    @Get('/:id')
+    getTypeById(@Param('id') id: number) {
+        return this.typeService.getTypeById(id);
     }
 }

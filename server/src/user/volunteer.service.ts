@@ -6,13 +6,15 @@ import { CreateVolunteerDto } from './dto/create-volunteer.dto';
 import { UpdateVolunteerDto } from './dto/update-volunteer.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginVolunteerDto } from './dto/login-volunteer.dto';
+import { FileUploaderService } from 'src/file-uploader/file-uploader.service';
 
 @Injectable()
 export class VolunteerService {
 
     constructor(@InjectModel(Volunteer) private volunteerModel: typeof Volunteer,
                             private userTypeService: UserTypeService,
-                            private authService: AuthService) {}
+                            private authService: AuthService,
+                            private fileUploaderService: FileUploaderService) {}
 
     async createVolunteer(dto: CreateVolunteerDto): Promise<string> {
         try {
@@ -92,8 +94,16 @@ export class VolunteerService {
         });
     }
 
-    async updateVolunteer(id: number, updateVolunteerDto: UpdateVolunteerDto): Promise<Volunteer> {
+    async updateVolunteer(
+        id: number, updateVolunteerDto: UpdateVolunteerDto,
+        imageFile?: Express.Multer.File
+      ): Promise<Volunteer> {
         const volunteer = await this.volunteerModel.findByPk(id);
+
+        if (imageFile) {
+            const imageUrl = await this.fileUploaderService.uploadFile(imageFile);
+            volunteer.image = imageUrl;
+        }
 
         if (updateVolunteerDto.age) {
           volunteer.age = updateVolunteerDto.age;

@@ -12,7 +12,7 @@ export class GenderController {
 
     @ApiOperation({summary: 'Create gender'})
     @ApiResponse({status: 200, type: Gender})
-    @Post('/create')
+    @Post('')
     createGender(@Body() genderDto: CreateGenderDto) {
         return this.genderService.createGender(genderDto);
     }
@@ -29,5 +29,12 @@ export class GenderController {
     @Get('/:value')
     getGenderByValue(@Param('value') value: string) {
         return this.genderService.getGenderByValue(value);
+    }
+
+    @ApiOperation({summary: 'Get gender by id'})
+    @ApiResponse({status: 200, type: [Gender]})
+    @Get('/:id')
+    getGenderById(@Param('id') id: number) {
+        return this.genderService.getGenderById(id);
     }
 }

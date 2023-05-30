@@ -6,18 +6,20 @@ import { UpdateAdopterDto } from './dto/update-adopter.dto';
 import { UserTypeService } from 'src/userType/userType.service';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginAdopterDto } from './dto/login-adopter.dto';
+import { FileUploaderService } from 'src/file-uploader/file-uploader.service';
 
 @Injectable()
 export class AdopterService {
 
-    constructor(@InjectModel(Adopter) private adopterModel: typeof Adopter,
-                    private userTypeService: UserTypeService,
-                    private authService: AuthService) {}
-
+    constructor(
+        @InjectModel(Adopter) private adopterModel: typeof Adopter,
+        private userTypeService: UserTypeService,
+        private authService: AuthService,
+        private fileUploaderService: FileUploaderService
+      ) {}
 
     async createAdopter(dto: CreateAdopterDto): Promise<string> {
         try {
-            console.log(dto);
             const adopter = await this.getAdopterByEmail(dto.email);
             if (!adopter) {
                 const passwordHash = await this.authService.hashPassword(dto.password);
@@ -65,7 +67,7 @@ export class AdopterService {
     }
 
     async getAllAdopters(): Promise<Adopter[]> {
-        return await this.adopterModel.findAll();
+        return await this.adopterModel.findAll({include: {all: true}});
     }
 
     async getAdopterByName(firstName: string, lastName: string): Promise<Adopter> {
@@ -93,27 +95,36 @@ export class AdopterService {
         });
     }
 
-    async updateAdopter(id: number, updateAdopterDto: UpdateAdopterDto): Promise<Adopter> {
+    async updateAdopter(
+        id: number, 
+        updateAdopterDto: UpdateAdopterDto,
+        imageFile?: Express.Multer.File
+      ): Promise<Adopter> {
         const adopter = await this.adopterModel.findByPk(id);
-
+    
+        if (imageFile) {
+          const imageUrl = await this.fileUploaderService.uploadFile(imageFile);
+          adopter.image = imageUrl;
+        }
+    
         if (updateAdopterDto.age) {
-            adopter.age = updateAdopterDto.age;
+          adopter.age = updateAdopterDto.age;
         }
     
         if (updateAdopterDto.phoneNumber) {
-            adopter.phoneNumber = updateAdopterDto.phoneNumber;
+          adopter.phoneNumber = updateAdopterDto.phoneNumber;
         }
     
         if (updateAdopterDto.firstName) {
-            adopter.firstName = updateAdopterDto.firstName;
+          adopter.firstName = updateAdopterDto.firstName;
         }
     
         if (updateAdopterDto.lastName) {
-            adopter.lastName = updateAdopterDto.lastName;
+          adopter.lastName = updateAdopterDto.lastName;
         }
-
+    
         if (updateAdopterDto.additionalInfo) {
-            adopter.additionalInfo = updateAdopterDto.additionalInfo;
+          adopter.additionalInfo = updateAdopterDto.additionalInfo;
         }
     
         await adopter.save();

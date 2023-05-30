@@ -10,18 +10,31 @@ import { Fur } from "./fur/fur.model";
 import { Behavior } from "./behavior/behavior.model";
 
 export interface AnimalCreationAttrs {
+    shelter_id: number;
     name: string;
+    type_id: number;
     age: number;
+    color_id: number;
+    status_id: number;
+    gender_id: number;
     size: number;
+    communication_id: number;
+    fur_id: number;
+    behavior_id: number;
     about: string;
+    image: string;
 }
 
-@Table({ tableName: 'animal' })
+@Table({ tableName: 'animal', timestamps: false })
 export class Animal extends Model<Animal, AnimalCreationAttrs> {
     
     @ApiProperty({ example: '1', description: 'Unique index' })
     @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
     animal_id: number;
+
+    @ApiProperty({ example: 'https://example.com/images/cat.jpg', description: 'Image URL' }) // Added field for image URL
+    @Column({ type: DataType.STRING, allowNull: true })
+    image: string;
 
     @ApiProperty({ example: '1', description: 'Shelter ID' })
     @ForeignKey(() => Shelter)
@@ -35,7 +48,7 @@ export class Animal extends Model<Animal, AnimalCreationAttrs> {
     @ApiProperty({ example: '1', description: 'Type ID' })
     @ForeignKey(() => Type)
     @Column({ type: DataType.INTEGER, allowNull: false })
-    typeId: number;
+    type_id: number;
 
     @ApiProperty({ example: '2', description: 'Age' })
     @Column({ type: DataType.INTEGER, allowNull: false })
@@ -44,17 +57,17 @@ export class Animal extends Model<Animal, AnimalCreationAttrs> {
     @ApiProperty({ example: '1', description: 'Color ID' })
     @ForeignKey(() => Color)
     @Column({ type: DataType.INTEGER, allowNull: false })
-    colorId: number;
+    color_id: number;
 
     @ApiProperty({ example: '1', description: 'Status ID' })
     @ForeignKey(() => Status)
     @Column({ type: DataType.INTEGER, allowNull: false })
-    statusId: number;
+    status_id: number;
 
     @ApiProperty({ example: '1', description: 'Gender ID' })
     @ForeignKey(() => Gender)
     @Column({ type: DataType.INTEGER, allowNull: false })
-    genderId: number;
+    gender_id: number;
 
     @ApiProperty({ example: '32', description: 'Size in centimeters' })
     @Column({ type: DataType.INTEGER, allowNull: false })
@@ -63,17 +76,17 @@ export class Animal extends Model<Animal, AnimalCreationAttrs> {
     @ApiProperty({ example: '1', description: 'Communication ID' })
     @ForeignKey(() => Communication)
     @Column({ type: DataType.INTEGER, allowNull: false })
-    communicationId: number;
+    communication_id: number;
 
     @ApiProperty({ example: '1', description: 'Fur ID' })
     @ForeignKey(() => Fur)
     @Column({ type: DataType.INTEGER, allowNull: false })
-    furId: number;
+    fur_id: number;
 
     @ApiProperty({ example: '1', description: 'Behavior ID' })
     @ForeignKey(() => Behavior)
     @Column({ type: DataType.INTEGER, allowNull: false })
-    behaviorId: number;
+    behavior_id: number;
 
     @ApiProperty({ example: 'Lava игривая, активная, любит различные развлечения и игрушки, любит находиться в центре внимания, дурачиться и веселиться.', description: 'About' })
     @Column({ type: DataType.STRING, allowNull: false })

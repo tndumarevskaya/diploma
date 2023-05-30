@@ -5,7 +5,7 @@ export interface ApplicationStatusCreationAttrs {
     value: string;
 }
 
-@Table({ tableName: 'status', timestamps: false })
+@Table({ tableName: 'application_status', timestamps: false })
 export class ApplicationStatus extends Model<ApplicationStatus, ApplicationStatusCreationAttrs> {
     
     @ApiProperty({ example: '1', description: 'Unique index'})

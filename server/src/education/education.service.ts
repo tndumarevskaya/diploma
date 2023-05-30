@@ -1,23 +1,35 @@
 import { Injectable } from '@nestjs/common';
 import { Education } from './education.model';
 import { CreateEducationDto } from './dto/create-education.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { FileUploaderService } from 'src/file-uploader/file-uploader.service';
 
 @Injectable()
 export class EducationService {
-  async createEducation(dto: CreateEducationDto): Promise<Education> {
-    return Education.create(dto);
+
+  constructor(@InjectModel(Education) private educationModel: typeof Education,
+    private fileUploaderService: FileUploaderService) {}
+
+  async createEducation(dto: CreateEducationDto,
+    imageFile: Express.Multer.File): Promise<Education> {
+    const education = await this.educationModel.create(dto);
+    const image = await this.fileUploaderService.uploadFile(imageFile);
+    education.image = image;
+    await education.save();
+    return education;
   }
 
   async getEducationById(educationId: number): Promise<Education> {
-    return Education.findByPk(educationId);
+    return await this.educationModel.findByPk(educationId);
   }
 
   async getAllEducations(): Promise<Education[]> {
-    return Education.findAll();
+    return await this.educationModel.findAll();
   }
 
   async deleteEducation(educationId: number): Promise<void> {
-    const education = await Education.findByPk(educationId);
-    await education.destroy();
+    await this.educationModel.destroy({
+      where: { education_id: educationId },
+    });
   }
 }

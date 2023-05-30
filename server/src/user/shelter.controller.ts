@@ -1,10 +1,11 @@
-import { Controller, Body, Post, Get, Param, UseGuards, Patch} from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ShelterService } from './shelter.service';
 import { Shelter } from './user.model';
 import { CreateShelterDto } from './dto/create-shelter.dto';
 import { UpdateShelterDto } from './dto/update-shelter.dto';
 import { LoginShelterDto } from './dto/login-shelter.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags("Shelter")
 @Controller('shelter')
@@ -55,7 +56,12 @@ export class ShelterController {
     }
 
     @Patch(':id')
-    updateShelter(@Param('id') id: number, @Body() updateShelterDto: UpdateShelterDto) {
-        return this.shelterService.updateShelter(id, updateShelterDto);
+    @UseInterceptors(FileInterceptor('image'))
+    updateShelter(
+        @Param('id') id: number,
+        @Body() updateAdopterDto: UpdateShelterDto,
+        @UploadedFile() image: Express.Multer.File
+    ) {
+        return this.shelterService.updateShelter(id, updateAdopterDto, image);
     }
 }

@@ -18,6 +18,21 @@ import { AdopterApplicationModule } from './adopter_application/adopter_applicat
 import { DonationModule } from './donation/donation.module';
 import { EducationModule } from './education/education.module';
 import { ApplicationStatusModule } from './application_status/application_status.module';
+import { FileUploaderModule } from './file-uploader/file-uploader.module';
+import { Status } from "./animal/status/status.model";
+import { Gender } from "./animal/gender/gender.model";
+import { Fur } from "./animal/fur/fur.model";
+import { Communication } from "./animal/communication/communication.model";
+import { Color } from "./animal/color/color.model";
+import { Behavior } from "./animal/behavior/behavior.model";
+import { AdopterApplication } from "./adopter_application/adopter_application.model";
+import { ApplicationStatus } from "./application_status/application_status.model";
+import { Chat } from "./chat/chat.model";
+import { Message } from "./chat/message/message.model";
+import { Donation } from "./donation/donation.model";
+import { Education } from "./education/education.model";
+import { Favorite } from "./favorite/favorite.model";
+import { VolunteerApplication } from "./volunteer_application/volunteer_application.model";
 
 @Module({
     controllers: [AnimalController],
@@ -34,7 +49,9 @@ import { ApplicationStatusModule } from './application_status/application_status
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Volunteer, Adopter, Shelter, UserType, Animal, Type],
+            models: [User, Volunteer, Adopter, Shelter, UserType, Animal, Type, Status, Gender, 
+                Fur, Communication, Color, Behavior, AdopterApplication, 
+                ApplicationStatus, Chat, Message, Donation, Education, Favorite, VolunteerApplication],
             autoLoadModels: true
         }),
         UserModule,
@@ -47,9 +64,12 @@ import { ApplicationStatusModule } from './application_status/application_status
         AdopterApplicationModule,
         DonationModule,
         EducationModule,
-        ApplicationStatusModule
+        ApplicationStatusModule,
+        FileUploaderModule
     ]
 })
+
+// export class AppModule {}
 
 export class AppModule implements NestModule {
     configure(user: MiddlewareConsumer) {

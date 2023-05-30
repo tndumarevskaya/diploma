@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Post, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Delete, Body, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { EducationService } from './education.service';
 import { CreateEducationDto } from './dto/create-education.dto';
 import { Education } from './education.model';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Education')
 @Controller('education')
@@ -11,9 +12,11 @@ export class EducationController {
 
   @ApiOperation({ summary: 'Create an education article' })
   @ApiResponse({ status: 201, description: 'The education article has been successfully created', type: Education })
+  @UseInterceptors(FileInterceptor('image'))
   @Post()
-  createEducation(@Body() createEducationDto: CreateEducationDto): Promise<Education> {
-    return this.educationService.createEducation(createEducationDto);
+  createEducation(@Body() createEducationDto: CreateEducationDto,
+    @UploadedFile() image: Express.Multer.File): Promise<Education> {
+    return this.educationService.createEducation(createEducationDto, image);
   }
 
   @ApiOperation({ summary: 'Get an education article by ID' })

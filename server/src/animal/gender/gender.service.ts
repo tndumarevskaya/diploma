@@ -26,4 +26,8 @@ export class GenderService {
     async getAllGenders(): Promise<Gender[]> {
         return await this.genderModel.findAll();
     }
+
+    async getGenderById(id: number): Promise<Gender> {
+        return await this.genderModel.findByPk(id);
+    }
 }

@@ -1,7 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString, IsInt, Min, Max, IsPhoneNumber } from "class-validator";
+import { IsOptional, IsString, IsInt, Min, Max, IsPhoneNumber, IsUrl } from "class-validator";
 
 export class UpdateVolunteerDto {
+
+    @ApiProperty({ example: 'https://example.com/path/to/image.jpg', description: 'Image URL' })
+    @IsOptional()
+    @IsUrl({}, { message: 'Invalid image URL' })
+    readonly image?: string;
+
     @ApiProperty({ example: 'John', description: "First name" })
     @IsOptional()
     @IsString({ message: 'First name should be string' })

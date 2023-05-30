@@ -11,14 +11,15 @@ export class DonationService {
   ) {}
 
   async createDonation(dto: CreateDonationDto): Promise<Donation> {
-    return this.donationModel.create(dto);
+    console.log(dto);
+    return await this.donationModel.create(dto);
   }
 
   async getAllDonation(): Promise<Donation[]> {
-    return this.donationModel.findAll();
+    return await this.donationModel.findAll();
   }
 
   async getDonationById(id: number): Promise<Donation> {
-    return this.donationModel.findByPk(id);
+    return await this.donationModel.findByPk(id);
   }
 }
