@@ -19,4 +19,9 @@ export class ChatService {
     return chat;
   }
 
+  async getAllChats(user_one_id?: number): Promise<Chat[]> {
+    const chats = await this.chatModel.findAll({where: {user_one_id: user_one_id}});
+    return chats;
+  }
+
 }

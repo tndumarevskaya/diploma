@@ -1,7 +1,8 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Message } from './message.model';
 import { MessageService } from './message.service';
+import { CreateMessageDto } from './dto/create-message.dto';
 
 @ApiTags('Message')
 @Controller('message')
@@ -12,12 +13,8 @@ export class MessageController {
   @ApiResponse({ status: 201, description: 'The message has been successfully created.', type: Message })
   @Post()
   createMessage(
-    @Body('userFrom') userFrom: number,
-    @Body('chatId') chatId: number,
-    @Body('dateCreated') dateCreated: Date,
-    @Body('isRead') isRead: boolean,
-  ): Promise<Message> {
-    return this.messageService.createMessage(userFrom, chatId, dateCreated, isRead);
+    @Body() createMessageDto: CreateMessageDto): Promise<Message> {
+    return this.messageService.createMessage(createMessageDto);
   }
 
   @ApiOperation({ summary: 'Get a message by ID' })
@@ -25,5 +22,12 @@ export class MessageController {
   @Get(':id')
   getMessageById(@Param('id') id: number): Promise<Message> {
     return this.messageService.getMessageById(id);
+  }
+
+  @ApiOperation({ summary: 'Get all messages' })
+  @ApiResponse({ status: 200, description: 'Returns all messages', type: [Message] })
+  @Get('')
+  getMessages(@Query("chat_id") chatId: number): Promise<Message[]> {
+    return this.messageService.getMessages(chatId);
   }
 }

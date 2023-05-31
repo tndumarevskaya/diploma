@@ -8,19 +8,26 @@ interface RequestModel extends Request {
 
 @Injectable()
 export class CheckRoleMiddleware implements NestMiddleware {
-    constructor(private readonly allowedUserTypes: string[]) {}
+    private readonly allowedUserTypes: Set<string>;
+
+    constructor(allowedUserTypes: string[]) {
+        if (!allowedUserTypes || allowedUserTypes.length === 0) {
+            throw new Error('allowedUserTypes must be a non-empty array');
+        }
+        this.allowedUserTypes = new Set(allowedUserTypes);
+    }
 
     use(req: RequestModel, res: Response, next: NextFunction) {
         const user: User<Shelter | Volunteer | Adopter> = req.user;
 
-        if (!user) {
-        throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+        if (!user || !user.userType || !user.userType.value) {
+            throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
         }
 
         const userType: string = user.userType.value;
 
-        if (!this.allowedUserTypes.includes(userType)) {
-        throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+        if (!this.allowedUserTypes.has(userType)) {
+            throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
         }
 
         next();

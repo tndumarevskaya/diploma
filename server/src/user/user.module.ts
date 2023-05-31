@@ -33,23 +33,6 @@ import { FileUploaderModule } from "src/file-uploader/file-uploader.module";
 })
 
 export class UserModule {}
-// export class UserModule implements NestModule {
-//     configure(consumer: MiddlewareConsumer) {
-//       consumer
-//         .apply(CheckRoleMiddleware)
-//         .forRoutes('shelter*');
-  
-//       consumer
-//         .apply(CheckRoleMiddleware)
-//         .forRoutes('volunteer*');
-  
-//       consumer
-//         .apply(CheckRoleMiddleware)
-//         .forRoutes('adopter*');
-//     }
-// }
-
-  
   
   
   
