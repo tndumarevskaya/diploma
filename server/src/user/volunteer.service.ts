@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Volunteer } from './user.model';
+import { User, Volunteer } from './user.model';
 import { UserTypeService } from 'src/userType/userType.service';
 import { CreateVolunteerDto } from './dto/create-volunteer.dto';
 import { UpdateVolunteerDto } from './dto/update-volunteer.dto';
@@ -12,34 +12,43 @@ import { FileUploaderService } from 'src/file-uploader/file-uploader.service';
 export class VolunteerService {
 
     constructor(@InjectModel(Volunteer) private volunteerModel: typeof Volunteer,
+                @InjectModel(User) private userModel: typeof User,
                             private userTypeService: UserTypeService,
                             private authService: AuthService,
                             private fileUploaderService: FileUploaderService) {}
 
     async createVolunteer(dto: CreateVolunteerDto): Promise<string> {
         try {
-            console.log(dto);
             const volunteer = await this.getVolunteerByEmail(dto.email);
+            console.log(dto);
             if (!volunteer) {
                 const passwordHash = await this.authService.hashPassword(dto.password);
                 const userType = await this.userTypeService.getUserTypeByValue("Volunteer");
+                const user = await this.userModel.create({
+                    ...dto,
+                    password: passwordHash
+                });
                 const volunteer = await this.volunteerModel.create({
+                    id: user.id,
                     ...dto, 
                     password: passwordHash
                 });
                 console.log(userType);
-                await volunteer.$set('userType', userType);
+                user.userType = userType;
+                user.userTypeId = userType.id;
+                await user.save();
+
                 volunteer.userType = userType;
                 volunteer.userTypeId = userType.id;
                 await volunteer.save();
                 const token =  await this.authService.generateJwt(volunteer.toJSON());
                 return token;
             } else {
-                throw new HttpException('Email is already in use', HttpStatus.CONFLICT);
+                throw new HttpException('Такой email уже используется', HttpStatus.CONFLICT);
             }
         } catch (e) {
             console.log(e);
-            throw new HttpException('Email is already in use', HttpStatus.CONFLICT);
+            throw new HttpException('Такой email уже используется', HttpStatus.CONFLICT);
         }
     }
 
@@ -53,15 +62,15 @@ export class VolunteerService {
                     const token =  await this.authService.generateJwt(payload.toJSON());
                     return token;
                 } else {
-                    throw new HttpException('Login was not successfull, wrong credentials', HttpStatus.UNAUTHORIZED);
+                    throw new HttpException('Неправильный email или пароль', HttpStatus.UNAUTHORIZED);
                 }
             } else {
-                throw new HttpException('Login was not successfull, wrong credentials', HttpStatus.UNAUTHORIZED);
+                throw new HttpException('Неправильный email или пароль', HttpStatus.UNAUTHORIZED);
             }
             
         } catch (e) {
             console.log(e);
-            throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+            throw new HttpException("Пользователь с такой почтой не найден", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -79,11 +88,7 @@ export class VolunteerService {
     }
 
     async getVolunteerById(id: number): Promise<Volunteer> {
-        return await this.volunteerModel.findOne({
-            where: {
-                id
-            }
-        });
+        return await this.volunteerModel.findByPk(id, {include: {all: true}});
     }
 
     async getVolunteerByEmail(email: string): Promise<Volunteer> {

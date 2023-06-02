@@ -33,7 +33,7 @@ export class Animal extends Model<Animal, AnimalCreationAttrs> {
     animal_id: number;
 
     @ApiProperty({ example: 'https://example.com/images/cat.jpg', description: 'Image URL' }) // Added field for image URL
-    @Column({ type: DataType.STRING, allowNull: true })
+    @Column({ type: DataType.TEXT, allowNull: true })
     image: string;
 
     @ApiProperty({ example: '1', description: 'Shelter ID' })

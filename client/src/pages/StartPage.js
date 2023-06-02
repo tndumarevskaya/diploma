@@ -22,11 +22,12 @@ function StartPage() {
                     животным и приютам. Проект сотрудничает с приютами и спасает жизни животных.
                 </h2>
             </div>
-            <div className='news'>
+            {/* <div className='news'>
                 <div className='new'></div>
                 <div className='new'></div>
                 <button>Читать больше</button>
-            </div>
+            </div> */}
+            <Footer />
         </div>
     )
 }

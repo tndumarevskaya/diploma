@@ -7,10 +7,12 @@ import Footer from '../../components/Footer'
 import SearchComponent from '../../components/SearchComponent'
 import AnimalApplication from '../../components/AnimalApplication'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export default function ShelterAnimalsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const shelter = useSelector(state => state.shelter);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -27,7 +29,10 @@ export default function ShelterAnimalsPage() {
   return (
     <div className='shelter-animal'>
       <Header />
-      <ProfileHeader name="Сострадание-НН"/>
+      <ProfileHeader
+        name={shelter.name}
+        image={shelter.image}
+      />
       <ProfileMenu />
       <div className='first-line'>
         <SearchComponent />

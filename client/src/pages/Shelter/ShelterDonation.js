@@ -4,12 +4,18 @@ import Header from '../../components/Header'
 import ProfileHeader from '../../components/ProfileHeader'
 import ProfileMenu from '../../components/ProfileMenu'
 import '../../styles/ShelterDonation.css'
+import { useSelector } from 'react-redux'
 
 export default function ShelterDonation() {
+  const shelter = useSelector(state => state.shelter);
+
   return (
     <div className='shelter-donation'>
         <Header />
-        <ProfileHeader name="Сострадание-НН"/>
+        <ProfileHeader
+            name={shelter.name}
+            image={shelter.image}
+        />
         <ProfileMenu />
         <div className='donation'>
             <table className='table-donation'>

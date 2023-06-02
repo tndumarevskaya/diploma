@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString, IsInt, Min, Max, IsPhoneNumber, Validate, IsUrl } from "class-validator";
+import { IsOptional, IsString, IsInt, Min, Max, IsPhoneNumber, Validate, IsUrl, IsEmail } from "class-validator";
 import { ScheduleValidator } from "src/pipes/shedule.validator.pipe";
 
 export class UpdateShelterDto {
@@ -23,6 +23,11 @@ export class UpdateShelterDto {
     @IsString({ message: 'Address should be a string' })
     @IsOptional()
     readonly address?: string;
+
+    @ApiProperty({example: 'user@gmail.com', description: "Email"})
+    @IsOptional()
+    @IsEmail({}, {message: 'Inccorect email'})
+    readonly email?: string;
 
     @ApiProperty({ example: '09:00 - 17:00, 10:00 - 18:00', description: 'The schedule of the shelter' })
     @IsOptional()

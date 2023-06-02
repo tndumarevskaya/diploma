@@ -9,7 +9,6 @@ export class UserService {
 
     constructor(@InjectModel(User) private userModel: typeof User,
                             private userTypeService: UserTypeService) {}
-
     async getUserById(userId: number): Promise<Volunteer | Adopter | Shelter | null> {
         const user = await this.userModel.findByPk(userId, { include: [UserType] });
         

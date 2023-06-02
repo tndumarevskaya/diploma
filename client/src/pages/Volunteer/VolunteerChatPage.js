@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import ProfileHeader from '../../components/ProfileHeader'
 import ProfileMenu from '../../components/ProfileMenu'
@@ -9,6 +9,11 @@ import DialogComponent from '../../components/DialogComponent'
 
 export default function VolunteerChatPage() {
     const location = useLocation();
+    const [volunteer, setVolunteer] = useState({});
+
+    useEffect(() => {
+      setVolunteer(JSON.parse(localStorage.getItem('volunteer')))
+    }, [])
 
     const renderComponent = () => {
         const { pathname } = location;
@@ -25,7 +30,11 @@ export default function VolunteerChatPage() {
     return (
         <div className='volunteer-chat-page'>
             <Header />
-            <ProfileHeader name={"Татьяна Думаревская"}/>
+            <ProfileHeader
+                firstName={volunteer.firstName}
+                lastName={volunteer.lastName}
+                image={volunteer.image}
+            />
             <ProfileMenu />
             <div className='components'>
                 {renderComponent()}

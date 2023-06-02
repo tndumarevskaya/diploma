@@ -22,6 +22,6 @@ export class Education extends Model<Education, EducationCreationAttrs> {
   text: string;
 
   @ApiProperty({ example: 'https://example.com/images/cat.jpg', description: 'Image URL' })
-  @Column({ type: DataType.STRING, allowNull: true })
+  @Column({ type: DataType.TEXT, allowNull: true })
   image: string;
 }

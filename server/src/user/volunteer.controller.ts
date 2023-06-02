@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile} from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile, Query} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { VolunteerService } from './volunteer.service';
 import { Volunteer } from './user.model';
@@ -36,8 +36,8 @@ export class VolunteerController {
 
     @ApiOperation({summary: 'Get volunteer by last and first name'})
     @ApiResponse({status: 200, type: [Volunteer]})
-    @Get('/:lastName-:firstName')
-    getVolunteerByName(@Param('lastName') lastName: string, @Param('firstName') firstName: string) {
+    @Get()
+    getVolunteerByName(@Query('lastName') lastName: string, @Query('firstName') firstName: string) {
         return this.volunteerService.getVolunteerByName(firstName, lastName);
     }
 
@@ -50,8 +50,8 @@ export class VolunteerController {
 
     @ApiOperation({summary: 'Get volunteer by email'})
     @ApiResponse({status: 200, type: [Volunteer]})
-    @Get('/:email')
-    getVolunteerByEmail(@Param('email') email: string) {
+    @Get()
+    getVolunteerByEmail(@Query('email') email: string) {
         return this.volunteerService.getVolunteerByEmail(email);
     }
 

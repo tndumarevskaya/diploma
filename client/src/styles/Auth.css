@@ -17,9 +17,14 @@ form .shelter, .volunteer-adopter{
     color: #083D77;
 }
 
+.auth {
+    height: 100%;
+}
+
 .auth-box {
     padding-top: 70px;
     width: 600px;
+    height: 100%;
     margin: 0 auto;
 }
 
@@ -31,4 +36,8 @@ form .shelter, .volunteer-adopter{
     display: block;
     margin-top: 36px;
     margin-bottom: 60px;
+}
+
+.error-message {
+    color: red;
 }

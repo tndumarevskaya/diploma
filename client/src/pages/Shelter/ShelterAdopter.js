@@ -8,9 +8,11 @@ import "../../styles/ShelterAdopter.css";
 import DialogComponent from '../../components/DialogComponent';
 import AllMessages from '../../components/AllMessages';
 import AllApplications from '../../components/AllApplications';
+import { useSelector } from 'react-redux';
 
 export default function ShelterAdopter() {
   const location = useLocation();
+  const shelter = useSelector(state => state.shelter);
 
   const renderComponent = () => {
     const { pathname } = location;
@@ -29,7 +31,10 @@ export default function ShelterAdopter() {
   return (
     <div className='shelter-volunteer'>
       <Header />
-      <ProfileHeader name="Сострадание-НН"/>
+      <ProfileHeader
+        name={shelter.name}
+        image={shelter.image}
+      />
       <ProfileMenu />
       <div className='adopter-page'>
         <div className='sidebar'>

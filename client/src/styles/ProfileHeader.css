@@ -2,19 +2,37 @@
     background: linear-gradient(180deg, transparent 80%, white 20%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     gap: 20px;
     padding-top: 4%;
     padding-bottom: 1%;
+    padding-left: 16%;
     margin: 0;
 }
 
 .profile-picture {
+    display: flex;
     object-fit: cover; 
     border-radius: 100%;
     height: 200px;
     width: 200px;
     border: 1px solid white;
+    background-color: aliceblue;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-picture-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: 1px solid white;
+    background-color: aliceblue;
+    border-radius: 100%;
+    cursor: pointer;
 }
 
 .profile-header h1 {

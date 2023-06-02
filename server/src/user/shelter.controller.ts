@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile} from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile, Query, Req} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ShelterService } from './shelter.service';
 import { Shelter } from './user.model';
@@ -27,18 +27,15 @@ export class ShelterController {
         return this.shelterService.login(shelterDto);
     }
 
-    @ApiOperation({summary: 'Get all shelters'})
+    @ApiOperation({summary: 'Get shelters'})
     @ApiResponse({status: 200, type: [Shelter]})
     @Get()
-    getAll() {
-        return this.shelterService.getAllShelters();
-    }
-
-    @ApiOperation({summary: 'Get shelter by name'})
-    @ApiResponse({status: 200, type: [Shelter]})
-    @Get('/:name')
-    getShelterByName(@Param('name') name: string) {
-        return this.shelterService.getShelterByName(name);
+    async getShelters(@Query('name') name: string) {
+        if (name) {
+            return await this.shelterService.getSheltersByName(name);
+        } else {
+            return await this.shelterService.getAllShelters();
+        }
     }
 
     @ApiOperation({summary: 'Get shelter by id'})
@@ -48,20 +45,29 @@ export class ShelterController {
         return this.shelterService.getShelterById(id);
     }
 
-    @ApiOperation({summary: 'Get shelter by email'})
-    @ApiResponse({status: 200, type: [Shelter]})
-    @Get('/:email')
-    getShelterByEmail(@Param('email') email: string) {
-        return this.shelterService.getShelterByEmail(email);
-    }
+    // @ApiOperation({summary: 'Get shelter by email'})
+    // @ApiResponse({status: 200, type: [Shelter]})
+    // @Get()
+    // getShelterByEmail(@Query('email') email: string) {
+    //     return this.shelterService.getShelterByEmail(email);
+    // }
 
     @Patch(':id')
     @UseInterceptors(FileInterceptor('image'))
-    updateShelter(
+    async updateShelter(
         @Param('id') id: number,
-        @Body() updateAdopterDto: UpdateShelterDto,
-        @UploadedFile() image: Express.Multer.File
+        @UploadedFile() image: Express.Multer.File,
+        @Req() req: any
     ) {
-        return this.shelterService.updateShelter(id, updateAdopterDto, image);
+        const updateShelterDto: UpdateShelterDto = {
+        name: req.body.name,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        address: req.body.address,
+        schedule: req.body.schedule,
+        additionalInfo: req.body.additionalInfo,
+        };
+
+        return this.shelterService.updateShelter(id, updateShelterDto, image);
     }
 }

@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Adopter } from './user.model';
+import { Adopter, User } from './user.model';
 import { CreateAdopterDto } from './dto/create-adopter.dto';
 import { UpdateAdopterDto } from './dto/update-adopter.dto';
 import { UserTypeService } from 'src/userType/userType.service';
@@ -13,6 +13,7 @@ export class AdopterService {
 
     constructor(
         @InjectModel(Adopter) private adopterModel: typeof Adopter,
+        @InjectModel(User) private userModel: typeof User,
         private userTypeService: UserTypeService,
         private authService: AuthService,
         private fileUploaderService: FileUploaderService
@@ -24,11 +25,22 @@ export class AdopterService {
             if (!adopter) {
                 const passwordHash = await this.authService.hashPassword(dto.password);
                 const userType = await this.userTypeService.getUserTypeByValue("Adopter");
+                const user = await this.userModel.create({
+                    ...dto,
+                    password: passwordHash
+                });
+                console.log(user);
                 const adopter = await this.adopterModel.create({
+                    id: user.id,
                     ...dto, 
                     password: passwordHash
                 });
                 console.log(userType);
+                await user.$set('userType', userType);
+                user.userType = userType;
+                user.userTypeId = userType.id;
+                await user.save();
+
                 await adopter.$set('userType', userType);
                 adopter.userType = userType;
                 adopter.userTypeId = userType.id;
@@ -36,11 +48,11 @@ export class AdopterService {
                 const token =  await this.authService.generateJwt(adopter.toJSON());
                 return token;
             } else {
-                throw new HttpException('Email is already in use', HttpStatus.CONFLICT);
+                throw new HttpException('Такой email уже используется', HttpStatus.CONFLICT);
             }
         } catch (e) {
             console.log(e);
-            throw new HttpException('Email is already in use', HttpStatus.CONFLICT);
+            throw new HttpException('Такой email уже используется', HttpStatus.CONFLICT);
         }
     }
 
@@ -54,15 +66,15 @@ export class AdopterService {
                     const token =  await this.authService.generateJwt(payload.toJSON());
                     return token;
                 } else {
-                    throw new HttpException('Login was not successfull, wrong credentials', HttpStatus.UNAUTHORIZED);
+                    throw new HttpException('Неправильный email или пароль', HttpStatus.UNAUTHORIZED);
                 }
             } else {
-                throw new HttpException('Login was not successfull, wrong credentials', HttpStatus.UNAUTHORIZED);
+                throw new HttpException('Неправильный email или пароль', HttpStatus.UNAUTHORIZED);
             }
             
         } catch (e) {
             console.log(e);
-            throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+            throw new HttpException("Пользователь с такой почтой не найден", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -80,11 +92,7 @@ export class AdopterService {
     }
 
     async getAdopterById(id: number): Promise<Adopter> {
-        return await this.adopterModel.findOne({
-            where: {
-                id
-            }
-        });
+        return await this.adopterModel.findByPk(id, {include: {all: true}});
     }
 
     async getAdopterByEmail(email: string): Promise<Adopter> {

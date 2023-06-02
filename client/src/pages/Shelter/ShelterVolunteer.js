@@ -9,10 +9,12 @@ import DialogComponent from '../../components/DialogComponent';
 import AllMessages from '../../components/AllMessages';
 import Application from '../../components/Application';
 import AllApplications from '../../components/AllApplications';
+import { useSelector } from 'react-redux';
 
 export default function ShelterVolunteer() {
   const navigate = useNavigate();
   const location = useLocation();
+  const shelter = useSelector(state => state.shelter);
 
   const renderComponent = () => {
     const { pathname } = location;
@@ -28,10 +30,14 @@ export default function ShelterVolunteer() {
     }
   };
 
+
   return (
     <div className='shelter-volunteer'>
       <Header />
-      <ProfileHeader name="Сострадание-НН" />
+      <ProfileHeader
+        name={shelter.name}
+        image={shelter.image}
+      />
       <ProfileMenu />
       <div className='volunteer-page'>
         <div className='sidebar'>

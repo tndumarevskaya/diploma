@@ -69,7 +69,7 @@ import { VolunteerApplication } from "./volunteer_application/volunteer_applicat
     ]
 })
 
-// export class AppModule {}
+//export class AppModule {}
 
 export class AppModule implements NestModule {
     configure(user: MiddlewareConsumer) {
@@ -82,6 +82,7 @@ export class AppModule implements NestModule {
             { path: '/adopter/login', method: RequestMethod.POST},
             { path: '/shelter/registration', method: RequestMethod.POST},
             { path: '/shelter/login', method: RequestMethod.POST},
+            { path: '/shelter/registration', method: RequestMethod.GET},
         )
         .forRoutes('')
     }

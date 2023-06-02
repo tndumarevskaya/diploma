@@ -1,21 +1,58 @@
 import { $authHost, $host} from ".";
-import jwt_decode from 'jwt-decode';
+import authHeader from "./auth-header";
 
-export const registration = async (email, password) => {
-    const {data} = await $host.post('/user/registration', {email, password});
-    localStorage.setItem('jsonWebToken', data.jsonWebToken);
-    return jwt_decode(data.jsonWebToken);
-}
+const updateShelter = async (id, data = {}, image) => {
+    let updatedData = {...data};
+    if(image) {
+        updatedData.image = image;
+    }
 
-export const login = async (email, password) => {
-    const {data} = await $host.post('/user/login', {email, password});
-    localStorage.setItem('jsonWebToken', data.jsonWebToken);
-    return jwt_decode(data.jsonWebToken);
-}
+    try {
+      const response = await $host.patch(`/shelter/${id}`, updatedData, {
+        headers: {
+          ...authHeader(),
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+};
 
-export const check = async () => {
-    const {data} = await $authHost.get('/user/authorization');
-    localStorage.setItem('jsonWebToken', data.jsonWebToken);
-    console.log(jwt_decode(data.jsonWebToken));
-    return jwt_decode(data.jsonWebToken);
+const getShelterInfo = async (id) => {
+    try {
+      const response = await $host.get(`/shelter/${id}`, { headers: authHeader()});
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+};
+
+const getAllShelters = async (id) => {
+    try {
+      const response = await $host.get(`/shelter`, { headers: authHeader()});
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+};
+
+const getShelters = async (name) => {
+    try {
+      const response = await $host.get(`/shelter`, { params: { name: name }, headers: authHeader()});
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+};
+
+export default {
+    updateShelter,
+    getShelterInfo,
+    getAllShelters,
+    getShelters
 }

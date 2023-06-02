@@ -1,0 +1,39 @@
+.shelter-profile-component {
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-between;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.05); 
+    padding: 2% 4%;
+    border-radius: 20px;
+}
+
+.shelter-profile-component img {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+}
+
+.shelter-profile-component .first-block {
+    display: flex;
+    gap: 6%;
+    width: 100%;
+}
+
+.shelter-profile-component .shelter-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.shelter-profile-component .shelter-info h3 {
+    margin-top: 10px;
+}
+.shelter-profile-component .shelter-info p{
+    margin-top: 6px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.shelter-profile-component button {
+    font-size: 20px;
+}

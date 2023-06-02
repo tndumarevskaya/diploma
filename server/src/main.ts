@@ -6,7 +6,7 @@ import { ErrorValidationPipe } from "./pipes/error.validation.pipe";
 async function start() {
   try {
     const PORT = process.env.PORT || 3000;
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule, { cors: true });
     
     const config = new DocumentBuilder()
       .setTitle('Web service for animal shelters')
@@ -17,7 +17,7 @@ async function start() {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('/api/docs', app, document);
 
-    app.useGlobalPipes(new ErrorValidationPipe());
+    // app.useGlobalPipes(new ErrorValidationPipe());
 
     await app.listen(PORT, () => (console.log(`Server started on port: ${PORT}`)));
   } catch(e) {

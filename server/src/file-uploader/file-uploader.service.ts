@@ -13,7 +13,6 @@ export class FileUploaderService {
         const bucket = admin.storage().bucket();
         const fileExtension = path.extname(file.originalname);
       
-        // Generate a unique filename using a random string
         const filename = `${crypto.randomBytes(16).toString('hex')}${fileExtension}`;
         
         const tempFilePath = path.join(os.tmpdir(), filename);
@@ -28,13 +27,17 @@ export class FileUploaderService {
           },
         };
       
-        await bucket.upload(tempFilePath, options);
+        const [uploadedFile] = await bucket.upload(tempFilePath, options);
       
         await fs.promises.unlink(tempFilePath);
       
-        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${filename}`;
+
+      const [publicUrl] = await uploadedFile.getSignedUrl({
+        action: 'read',
+        expires: '03-01-2500',
+      });
       
-        console.log(publicUrl);
-        return publicUrl;
-    }
+      console.log('File available at', uploadedFile);
+      return publicUrl;
+  }
 }

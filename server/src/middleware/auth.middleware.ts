@@ -28,7 +28,7 @@ export class AuthMiddleware implements NestMiddleware {
         try {
             tokenArray = req.headers['authorization'].split(' ');
         } catch (error) {
-            throw new HttpException('Invalid token format', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Unauthorized', HttpStatus.BAD_REQUEST);
         }
         
         let decodedToken;

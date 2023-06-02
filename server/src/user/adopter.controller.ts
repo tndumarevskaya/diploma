@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile} from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, UseGuards, Patch, UseInterceptors, UploadedFile, Query} from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Adopter } from './user.model';
 import { CreateAdopterDto } from './dto/create-adopter.dto';
@@ -36,8 +36,8 @@ export class AdopterController {
 
     @ApiOperation({summary: 'Get adopter by last and first name'})
     @ApiResponse({status: 200, type: [Adopter]})
-    @Get('/:lastName-:firstName')
-    getAdopterrByName(@Param('lastName') lastName: string, @Param('firstName') firstName: string) {
+    @Get('')
+    getAdopterrByName(@Query('lastName') lastName: string, @Query('firstName') firstName: string) {
         return this.adopterService.getAdopterByName(firstName, lastName);
     }
 
@@ -50,8 +50,8 @@ export class AdopterController {
 
     @ApiOperation({summary: 'Get adopter by email'})
     @ApiResponse({status: 200, type: [Adopter]})
-    @Get('/:email')
-    getAdopterByEmail(@Param('email') email: string) {
+    @Get()
+    getAdopterByEmail(@Query('email') email: string) {
         return this.adopterService.getAdopterByEmail(email);
     }
 
