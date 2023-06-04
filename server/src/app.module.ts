@@ -69,21 +69,21 @@ import { VolunteerApplication } from "./volunteer_application/volunteer_applicat
     ]
 })
 
-export class AppModule {}
+//export class AppModule {}
 
-// export class AppModule implements NestModule {
-//     configure(user: MiddlewareConsumer) {
-//       user
-//         .apply(AuthMiddleware)
-//         .exclude(
-//             { path: '/volunteer/registration', method: RequestMethod.POST},
-//             { path: '/volunteer/login', method: RequestMethod.POST},
-//             { path: '/adopter/registration', method: RequestMethod.POST},
-//             { path: '/adopter/login', method: RequestMethod.POST},
-//             { path: '/shelter/registration', method: RequestMethod.POST},
-//             { path: '/shelter/login', method: RequestMethod.POST},
-//             { path: '/shelter/registration', method: RequestMethod.GET},
-//         )
-//         .forRoutes('')
-//     }
-// }
+export class AppModule implements NestModule {
+    configure(user: MiddlewareConsumer) {
+      user
+        .apply(AuthMiddleware)
+        .exclude(
+            { path: '/volunteer/registration', method: RequestMethod.POST},
+            { path: '/volunteer/login', method: RequestMethod.POST},
+            { path: '/adopter/registration', method: RequestMethod.POST},
+            { path: '/adopter/login', method: RequestMethod.POST},
+            { path: '/shelter/registration', method: RequestMethod.POST},
+            { path: '/shelter/login', method: RequestMethod.POST},
+            { path: '/shelter/registration', method: RequestMethod.GET},
+        )
+        .forRoutes('')
+    }
+}
