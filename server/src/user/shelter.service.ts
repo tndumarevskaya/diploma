@@ -112,7 +112,7 @@ export class ShelterService {
             shelter.image = imageUrl;
         }
 
-        const fieldsToUpdate = ['phoneNumber', 'name', 'address', 'schedule', 'additionalInfo'];
+        const fieldsToUpdate = ['phoneNumber', 'name', 'address', 'schedule', 'social', 'about', 'additionalInfo'];
 
         fieldsToUpdate.forEach(field => {
             if (updateShelterDto[field]) {

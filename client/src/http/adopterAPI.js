@@ -23,7 +23,7 @@ const updateAdopter = async (id, data = {}, image) => {
 
 const getAdopterInfo = async (id) => {
     try {
-      const response = await $host.get(`/adp[ter/${id}`, { headers: authHeader()});
+      const response = await $host.get(`/adopter/${id}`, { headers: authHeader()});
       return response.data;
     } catch (error) {
       throw error;

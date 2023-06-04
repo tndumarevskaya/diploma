@@ -1,0 +1,63 @@
+.shelterInfoComponent {
+    display: flex;
+    flex-direction: column;
+    margin: 2% 12%;
+    gap: 10px;
+}
+
+.shelterInfoComponent .second-button {
+    align-self: start;   
+}
+.shelterInfoComponent h2 {
+    margin: 0;
+    text-align: left;
+    margin-bottom: 2%;
+}
+  .shelterInfoComponent img {
+    width: 260px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .shelterInfoComponent .shelter-info {
+    display: flex;
+    gap: 4%;
+    margin-bottom: 4%;
+  }
+
+  .shelterInfoComponent .shelter-info .main-info {
+    display: flex;
+    gap: 1%;
+    flex-direction: column;
+  }
+
+  .shelterInfoComponent .shelter-info .main-info h3 {
+    font-size: 20px;
+  }
+
+  .shelterInfoComponent .shelter-info .main-info p {
+    border: none;
+    padding: 0;
+    margin: 0;
+  } 
+
+  .shelterInfoComponent p {
+    border: 1px solid #D36135;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 2%;
+  }
+
+  .shelterInfoComponent .animals {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .shelterInfoComponent .animals .animal-card {
+    flex: 0 0 auto;
+    min-width: 220px;
+    box-sizing: border-box;
+    margin: 20px;
+}
+

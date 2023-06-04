@@ -21,8 +21,8 @@ export default function VolunteerProfilePage() {
     const [work, setWork] = useState('');
     const [education, setEducation] = useState('');
     const [socials, setSocials] = useState('');
-    const [about, setAbout] = useState('');
     const [additionalInfo, setAdditionalInfo] = useState('');
+    const [age, setAge] = useState('');
     const dispatch = useDispatch();
 
     const fetchVolunteerInfo = async () => {
@@ -52,6 +52,7 @@ export default function VolunteerProfilePage() {
         setFirstName(volunteer.firstName);
         setImage(volunteer.image);
         setAdditionalInfo(volunteer.additionalInfo);
+        setAge(volunteer.age);
     }, [dispatch, id]);
 
     const toggleEditMode = () => {
@@ -66,7 +67,10 @@ export default function VolunteerProfilePage() {
           "lastName": lastName,
           "email": email,
           "address": address,
-          "schedule": education,
+          "social": socials,
+          "education": education,
+          "work": work,
+          "age": age,
           "additionalInfo": additionalInfo,
         };
         console.log(image);
@@ -79,9 +83,9 @@ export default function VolunteerProfilePage() {
     const handleAddressChange = (event) => setAddress(event.target.value);
     const handleEducationChange = (event) => setEducation(event.target.value);
     const handleWorkChange = (event) => setWork(event.target.value);
-    const handleAboutChange = (event) => setAbout(event.target.value);
     const handleAdditionalInfoChange = (event) => setAdditionalInfo(event.target.value);
-
+    const handleSocialChange = (event) => setSocials(event.target.value);
+    const handleAgeChange = (event) => setAge(event.target.value);
 
     return (
         <div className='volunteer-profile'>
@@ -98,13 +102,28 @@ export default function VolunteerProfilePage() {
             <ProfileMenu />
             <div className='profile-info'>
                 <div className={`phone-number ${isEditMode ? 'edit-mode' : ''}`}>
+                    <h3>Возраст:</h3>
+                        {isEditMode ? (
+                            <input
+                            type='number'
+                            placeholder='18'
+                            value={age || volunteer.age}
+                            onChange={handleAgeChange}
+                            />
+                        ) : (
+                            <p style={{ color: volunteer.age ? 'black' : 'rgba(0, 0, 0, 0.3)' }}>
+                            {volunteer.age || '18'}
+                            </p>
+                        )}
+                </div>
+                <div className={`phone-number ${isEditMode ? 'edit-mode' : ''}`}>
                 <h3>Номер телефона:</h3>
                     {isEditMode ? (
                         <input
                         type='tel'
                         placeholder='+7 910 234 55 23'
                         pattern='^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$'
-                        value={phoneNumber}
+                        value={phoneNumber  || volunteer.phoneNumber}
                         onChange={handlePhoneNumberChange}
                         />
                     ) : (
@@ -120,7 +139,7 @@ export default function VolunteerProfilePage() {
                         type='email'
                         placeholder='example@email.com'
                         pattern='.+@globex\.com'
-                        value={email}
+                        value={email  || volunteer.email}
                         onChange={handleEmailChange}
                         />
                     ) : (
@@ -135,7 +154,7 @@ export default function VolunteerProfilePage() {
                         <input 
                             type='text' 
                             placeholder='Нижний Новгород' 
-                            value={address}
+                            value={address || volunteer.address}
                             onChange={handleAddressChange}
                         /> 
                         : 
@@ -150,7 +169,7 @@ export default function VolunteerProfilePage() {
                         <input 
                             type='text' 
                             placeholder='Школа №1' 
-                            value={education}
+                            value={education || volunteer.education}
                             onChange={handleEducationChange}
                         /> 
                         : 
@@ -165,7 +184,7 @@ export default function VolunteerProfilePage() {
                         <input 
                             type='text' 
                             placeholder='ООО Сбербанк' 
-                            value={work}
+                            value={work || volunteer.work}
                             onChange={handleWorkChange}
                         /> 
                         : 
@@ -177,10 +196,15 @@ export default function VolunteerProfilePage() {
                 <div className={`socials ${isEditMode ? 'edit-mode' : ''}`}>
                 <h3>Социальные сети:</h3>
                     {isEditMode ? (
-                        <input type='text' placeholder='VK: https://vk.com'/>
+                        <input 
+                            type='text' 
+                            placeholder='VK: https://vk.com'  
+                            value={socials  || volunteer.social}
+                            onChange={handleSocialChange}
+                        />
                     ) : (
                         <p style={{ color: 'rgba(0, 0, 0, 0.3)' }}>
-                        VK: https://vk.com
+                            {volunteer.work || 'VK: https://vk.com'}
                         </p>
                     )}
                 </div>
@@ -190,7 +214,7 @@ export default function VolunteerProfilePage() {
                         <input
                         type='text'
                         placeholder='Расскажи о себе'
-                        value={additionalInfo}
+                        value={additionalInfo  || volunteer.additionalInfo}
                         onChange={handleAdditionalInfoChange}
                         />
                     ) : (

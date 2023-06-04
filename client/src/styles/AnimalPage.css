@@ -10,6 +10,15 @@
     height: 360px;
     border: 1px solid;
     border-radius: 20px;
+    object-fit: cover;
+}
+
+.animal-profile .animal-prev-picture {
+    width: 280px;
+    height: 360px;
+    border: 1px solid;
+    border-radius: 20px;
+    object-fit: cover;
 }
 
 .characteristics-block {
@@ -46,4 +55,16 @@
     flex: 100%;
     display: flex;
     justify-content: space-around;
+}
+
+.animal-picture-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: 360px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background-color: aliceblue;
+    cursor: pointer;
 }

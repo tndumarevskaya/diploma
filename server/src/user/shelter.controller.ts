@@ -66,8 +66,9 @@ export class ShelterController {
         address: req.body.address,
         schedule: req.body.schedule,
         additionalInfo: req.body.additionalInfo,
+        social: req.body.social,
+        about: req.body.about,
         };
-
         return this.shelterService.updateShelter(id, updateShelterDto, image);
     }
 }

@@ -11,7 +11,7 @@ export class Type extends Model<Type, TypeCreationAttrs> {
     @ApiProperty({ example: '1', description: 'Unique index'})
     @PrimaryKey
     @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, allowNull: false })
-    typeId: number;
+    id: number;
 
     @ApiProperty({ example: 'Cat', description: 'Unique value'})
     @Column({ type: DataType.STRING, unique: true, allowNull: false })

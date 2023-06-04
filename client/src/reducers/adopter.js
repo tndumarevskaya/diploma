@@ -25,7 +25,7 @@ export default function adopterProfileReducer(state = initialState, action) {
         case UPDATE_ADOPTER_PROFILE_SUCCESS:
             return {
                 ...state,
-                shelter: payload,
+                adopter: payload,
             };
         case UPDATE_ADOPTER_PROFILE_FAILURE:
             return {

@@ -4,13 +4,15 @@ import { VolunteerApplicationController } from './volunteer_application.controll
 import { SequelizeModule } from '@nestjs/sequelize';
 import { VolunteerApplication } from './volunteer_application.model';
 import { UserModule } from 'src/user/user.module';
+import { ApplicationStatusModule } from 'src/application_status/application_status.module';
 
 @Module({
   providers: [VolunteerApplicationService],
   controllers: [VolunteerApplicationController],
   imports: [
     SequelizeModule.forFeature([VolunteerApplication]),
-    UserModule
+    UserModule,
+    ApplicationStatusModule
   ],
   exports: [
     VolunteerApplicationService

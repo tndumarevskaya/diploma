@@ -68,7 +68,7 @@ export default function ProfileMenu() {
             </NavLink>
             ))}
         </div>
-        <div ref={underlineRef} className="menu-underline" />
+        {/* <div ref={underlineRef} className="menu-underline" /> */}
         </div>
     );
 }

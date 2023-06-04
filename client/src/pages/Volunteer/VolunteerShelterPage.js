@@ -21,13 +21,8 @@ export default function VolunteerShelterPage() {
       const response = await shelterAPI.getAllShelters();
       setShelters(response);
     } catch (error) {
-      const _content =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      setVolunteer(_content);
+      const _content = error.response;
+      console.log(_content);
     }
   };
 
@@ -49,7 +44,10 @@ export default function VolunteerShelterPage() {
     setSelectedShelter(shelter);
   };
 
-  console.log(shelters);
+  const handleBackClick = () => {
+    setSelectedShelter(null);
+  };
+
   return (
     <div className='volunteer-shelter'>
         <Header />
@@ -60,13 +58,13 @@ export default function VolunteerShelterPage() {
         />
         <ProfileMenu />
         {selectedShelter ? 
-          <ShelterInfoComponent shelter={selectedShelter} /> 
+          <ShelterInfoComponent shelter={selectedShelter} onBackClick={handleBackClick} volunteerId={volunteer.id}/> 
           :
           <div className="volunteer-shelter-block">
             <SearchComponent onSearch={handleSearch} text="Название приюта"/>
             <h2>Результаты поиска:</h2>
             {shelters.map((shelter, index) => (
-              <ShelterProfileComponent key={index} shelter={shelter} onSelect={handleShelterSelect}/>
+              <ShelterProfileComponent key={index} shelter={shelter} onSelect={handleShelterSelect} volunteerId={volunteer.id} />
             ))}
           </div>
         }

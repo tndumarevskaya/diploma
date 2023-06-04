@@ -126,6 +126,18 @@ export class VolunteerService {
             volunteer.lastName = updateVolunteerDto.lastName;
         }
 
+        if (updateVolunteerDto.education) {
+            volunteer.education = updateVolunteerDto.education;
+        }
+
+        if (updateVolunteerDto.work) {
+            volunteer.work = updateVolunteerDto.work;
+        }
+
+        if (updateVolunteerDto.social) {
+            volunteer.social = updateVolunteerDto.social;
+        }
+
         if (updateVolunteerDto.additionalInfo) {
             volunteer.additionalInfo = updateVolunteerDto.additionalInfo;
         }

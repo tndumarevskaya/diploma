@@ -1,21 +1,17 @@
 .all-applications {
 	display: flex;
-	flex-wrap: wrap;
+    flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	margin-right: 4%;
 }
-
-.all-applications button {
-	flex: 0.3;
-}
-
-.all-applications .search {
-	flex: 0.7;
+.all-applications .top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .table-application {
-	flex: 1;
     font-family: 'Unbounded', cursive;
     font-weight: 400!important;
     font-size: 16px;
@@ -61,6 +57,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
@@ -78,5 +75,17 @@
 
 .application .modal-content {
     display: flex;
-    gap: 10%;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.application p {
+    margin-top: 4px;
+    border: 1px solid #D36135;
+    padding: 4px 8px;
+    border-radius: 10px;
+}
+
+.all-applications .dropdown-menu button, .dropdown-list {
+    width: 200px;
 }

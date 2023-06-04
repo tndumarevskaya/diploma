@@ -1,0 +1,74 @@
+.animal-catalog {
+    background-image: url("../assets/dog_cat.jpg");
+    background-size: 100%;
+    width: 100%;
+    height: 620px;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+.animal-catalog h1 {
+    padding: 4%;
+    width: 64%;
+    align-self: center;
+    color: white;
+    text-align: center;
+}
+
+.buttons {
+    align-self: center;
+    display: flex;
+    gap: 61px;
+}
+
+.animal-catalog .buttons button {
+    width: 270px;
+    height: 246px;
+    background-color: #083D77;
+    border: none;
+    color: white;
+    font-family: 'Unbounded', cursive;
+    font-size: 26px;
+    font-weight: 600;
+    border-radius: 40px;
+}
+
+.animal-catalog .search {
+    margin: 4% 12%;
+}
+
+.animal-catalog .animals-list {
+    margin: auto 14%;
+    display: flex;
+}
+
+.animal-catalog h2 {
+    margin: 8% 14% 2%;
+}
+
+.animal-catalog .animals-list .animals {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.animal-catalog .animals-list .animals .animal-card {
+    flex: 0 0 auto;
+    min-width: 210px;
+    box-sizing: border-box;
+    margin: 20px;
+}
+
+.animal-card h2 {
+    margin: 0;
+}
+
+.animal-catalog .animals-list button {
+    background-color: transparent;
+    color: #083D77;
+}
+
+.animal-catalog .animals-list button:disabled {
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.4);
+}

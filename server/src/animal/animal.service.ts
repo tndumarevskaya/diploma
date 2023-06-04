@@ -45,6 +45,7 @@ export class AnimalService {
       ...createAnimalDto
     });
 
+
     animal.image = imageUrl;
     animal.color = color;
     animal.shelter = shelter;
@@ -64,37 +65,37 @@ export class AnimalService {
     const filterOptions: any = {};
 
     if (shelterId) {
-      filterOptions.shelterId = shelterId;
+      filterOptions.shelter_id = shelterId;
     }
     if (name) {
       filterOptions.name = name;
     }
     if (typeId) {
-      filterOptions.typeId = typeId;
+      filterOptions.type_id = typeId;
     }
     if (age) {
       filterOptions.age = age;
     }
     if (statusId) {
-      filterOptions.statusId = statusId;
+      filterOptions.status_id = statusId;
     }
     if (genderId) {
-      filterOptions.genderId = genderId;
+      filterOptions.gender_id = genderId;
     }
     if (colorId) {
-      filterOptions.colorId = colorId;
+      filterOptions.color_id = colorId;
     }
     if (size) {
       filterOptions.size = size;
     }
     if (communicationId) {
-      filterOptions.communicationId = communicationId;
+      filterOptions.communication_id = communicationId;
     }
     if (furId) {
-      filterOptions.furId = furId;
+      filterOptions.fur_id = furId;
     }
     if (behaviorId) {
-      filterOptions.behaviorId = behaviorId;
+      filterOptions.behavior_id = behaviorId;
     }
 
     const filteredAnimals = await Animal.findAll({
@@ -106,7 +107,7 @@ export class AnimalService {
   }
 
   async getAnimalById(id: number): Promise<Animal> {
-    const animal = await this.animalModel.findByPk(id);
+    const animal = await this.animalModel.findByPk(id, {include: {all: true}});
     return animal;
   }
 

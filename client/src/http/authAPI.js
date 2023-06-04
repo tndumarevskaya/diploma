@@ -66,14 +66,14 @@ const loginVolunteer = async (email, password) => {
         console.log(decoded_data);
         return decoded_data;
     } catch (error) {
-        console.log(error.response);
+        console.log(error);
         throw JSON.stringify(error.response);
     }
 }
 
 const loginAdopter = async (email, password) => {
     try {
-        const {data} = await $host.post('/adopter/logon', {email, password});
+        const {data} = await $host.post('/adopter/login', {email, password});
         const decoded_data = jwt_decode(data);
         localStorage.setItem('user', JSON.stringify(decoded_data));
         localStorage.setItem('token', data);
@@ -86,8 +86,7 @@ const loginAdopter = async (email, password) => {
 }
 
 const logout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem('token');
+    localStorage.clear();
 };
 
 export default {

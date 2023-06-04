@@ -29,13 +29,8 @@ export default function ShelterProfilePage() {
       const response = await shelterAPI.getShelterInfo(id);
       setShelter(response);
     } catch (error) {
-      const _content =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      setShelter(_content);
+      const _content = error.response;
+      console.log(_content);
     }
   };
 
@@ -48,6 +43,8 @@ export default function ShelterProfilePage() {
     setSchedule(shelter.schedule);
     setName(shelter.name);
     setImage(shelter.image);
+    setSocials(shelter.social);
+    setAbout(shelter.about);
     setAdditionalInfo(shelter.additionalInfo);
   }, [dispatch, id]);
 
@@ -63,6 +60,8 @@ export default function ShelterProfilePage() {
       "email": email,
       "address": address,
       "schedule": schedule,
+      "social": socials,
+      "about": about,
       "additionalInfo": additionalInfo,
     };
     console.log(image);
@@ -97,7 +96,7 @@ export default function ShelterProfilePage() {
               type='tel'
               placeholder='+79102345523'
               pattern='^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$'
-              value={phoneNumber}
+              value={phoneNumber || shelter.phoneNumber}
               onChange={handlePhoneNumberChange}
             />
           ) : (
@@ -113,7 +112,7 @@ export default function ShelterProfilePage() {
               type='email'
               placeholder='example@email.com'
               pattern='.+@globex\.com'
-              value={email}
+              value={email || shelter.email}
               onChange={handleEmailChange}
             />
           ) : (
@@ -128,12 +127,12 @@ export default function ShelterProfilePage() {
             <input
               type='text'
               placeholder='г. Нижний Новгород, ул. Бурнаковский проезд, д.16'
-              value={address}
+              value={address || shelter.address}
               onChange={handleAddressChange}
             />
           ) : (
             <p style={{ color: shelter.address ? 'black' : 'rgba(0, 0, 0, 0.3)' }}>
-              {shelter.address || 'г. Нижний Новгород, ул. Бурнаковский проезд, д.16'}
+              {shelter.address || 'г. Нижний Новгород, ул. Минина'}
             </p>
           )}
         </div>
@@ -143,7 +142,7 @@ export default function ShelterProfilePage() {
             <input
               type='text'
               placeholder='Вторник - Пятница: с 11:00 до 18:00 Суббота: с 9:00 до 15:00 Воскресенье, Понедельник - выходные дни'
-              value={schedule}
+              value={schedule || shelter.schedule}
               onChange={handleScheduleChange}
             />
           ) : (
@@ -154,25 +153,31 @@ export default function ShelterProfilePage() {
         </div>
         <div className={`socials ${isEditMode ? 'edit-mode' : ''}`}>
           <h3>Социальные сети:</h3>
-          {isEditMode ? (
-            <input type='text' placeholder='Социальные сети'/>
-          ) : (
-            <p style={{ color: 'rgba(0, 0, 0, 0.3)' }}>
-              VK: https://vk.com/bfsostradanie
-              <br />
-              Instagram: https://vk.com/bfsostradanie
-            </p>
-          )}
-        </div>
+              {isEditMode ? (
+                  <input 
+                      type='text' 
+                      placeholder='VK: https://vk.com'  
+                      value={socials || shelter.social}
+                      onChange={handleSocialsChange}
+                  />
+              ) : (
+                  <p style={{ color: shelter.additionalInfo ? 'black' : 'rgba(0, 0, 0, 0.3)' }}>
+                      {shelter.social || 'VK: https://vk.com'}
+                  </p>
+              )}
+          </div>
         <div className={`about ${isEditMode ? 'edit-mode' : ''}`}>
           <h3>О нас:</h3>
           {isEditMode ? (
-            <input type='text' placeholder='Расскажите о приюте'/>
+             <input
+             type='text'
+             placeholder='Расскажите о приюте'
+             value={about || shelter.about}
+             onChange={handleAboutChange}
+           />
           ) : (
-            <p>
-              Нижегородский Благотворительный Фонд Защиты Животных «Сострадание НН» — организация,
-              чья деятельность направлена на помощь бездомным животным и лошадям в Нижнем Новгороде.
-              Фонд содержит приют на 200 собак и 50 кошек и опекает 10 спасённых с бойни лошадей.
+            <p style={{ color: shelter.additionalInfo ? 'black' : 'rgba(0, 0, 0, 0.3)' }}>
+             {shelter.about || 'Расскажите о приюте'}
             </p>
           )}
         </div>
@@ -182,7 +187,7 @@ export default function ShelterProfilePage() {
             <input
               type='text'
               placeholder='Дополнительная информация'
-              value={additionalInfo}
+              value={additionalInfo || shelter.additionalInfo}
               onChange={handleAdditionalInfoChange}
             />
           ) : (

@@ -1,0 +1,25 @@
+.animal-card {
+    width: 180px;
+    height: 256px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    padding: 28px 10px;
+}
+
+.animal-card h2 {
+    color: white;
+    margin: 0;
+}
+
+.age {
+    font-size: 18px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}

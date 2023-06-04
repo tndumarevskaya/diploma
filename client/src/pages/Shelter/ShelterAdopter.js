@@ -12,17 +12,21 @@ import { useSelector } from 'react-redux';
 
 export default function ShelterAdopter() {
   const location = useLocation();
-  const shelter = useSelector(state => state.shelter);
+  const [shelter, setShelter] = useState({});
+
+  useEffect(() => {
+    setShelter(JSON.parse(localStorage.getItem('shelter')))
+  }, []);
 
   const renderComponent = () => {
     const { pathname } = location;
 
-    if (pathname === '/shelter/adopter/chat') {
+    if (pathname === `/shelter/${shelter.id}/adopter/chat`) {
       return <AllMessages />;
-    } else if (pathname.startsWith('/shelter/adopter/chat/')) {
+    } else if (pathname.startsWith(`/shelter/${shelter.id}/adopter/chat`)) {
       return <DialogComponent />;
-    } else if (pathname === '/shelter/adopter/application') {
-      return <AllApplications />;
+    } else if (pathname === `/shelter/${shelter.id}/adopter/application`) {
+      return <AllApplications shelter_id={shelter.id}/>;
     } else {
       return null;
     }
@@ -38,10 +42,10 @@ export default function ShelterAdopter() {
       <ProfileMenu />
       <div className='adopter-page'>
         <div className='sidebar'>
-          <NavLink activeClassName="active" to='/shelter/adopter/chat'>
+          <NavLink activeClassName="active" to={`/shelter/${shelter.id}/adopter/chat`}>
             Чаты
           </NavLink>
-          <NavLink activeClassName="active" to='/shelter/adopter/application'>
+          <NavLink activeClassName="active" to={`/shelter/${shelter.id}/adopter/application`}>
             Заявки
           </NavLink>
         </div>

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import { createStore, applyMiddleware } from 'redux';
+import { SocketContext, socket } from './sockets/chat-socket';
 
 const store = createStore(
   rootReducer,
@@ -15,6 +16,6 @@ const store = createStore(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-     <App />
+    <App />
   </Provider>
 );

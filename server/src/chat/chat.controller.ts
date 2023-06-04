@@ -1,24 +1,39 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Query } from '@nestjs/common';
+import { ChatService } from './chat.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Chat } from './chat.model';
-import { ChatService } from './chat.service';
+import { CreateChatDto } from './dto/create-chat.dto';
+import { CreateMessageDto } from './message/dto/create-message.dto';
+import { Message } from './message/message.model';
 
 @ApiTags('Chat')
 @Controller('chat')
 export class ChatController {
-  constructor(private readonly chatService: ChatService) {}
+  constructor(private chatService: ChatService) {}
 
   @ApiOperation({ summary: 'Create a chat' })
-  @ApiResponse({ status: 201, description: 'The chat has been successfully created.', type: Chat })
+  @ApiResponse({
+    status: 201,
+    description: 'The chat has been successfully created.',
+    type: Chat,
+  })
   @Post()
-  createChat(@Body('userOneId') userOneId: number, @Body('userTwoId') userTwoId: number): Promise<Chat> {
-    return this.chatService.createChat(userOneId, userTwoId);
+  async createChat(@Body() createChatDto: CreateChatDto) {
+    return await this.chatService.createChat(createChatDto);
   }
 
-  @ApiOperation({ summary: 'Get a chat by ID' })
-  @ApiResponse({ status: 200, description: 'Returns the chat with the specified ID.', type: Chat })
-  @Get(':id')
-  getChatById(@Param('id') id: number): Promise<Chat> {
-    return this.chatService.getChatById(id);
+  @Post('message')
+  async postMessage(@Body() createMessageDto: CreateMessageDto) {
+    return await this.chatService.postMessage(createMessageDto);
+  }
+
+  @Get('message')
+  async getMessages(@Query('chat_id') chat_id: number): Promise<Message[]> {
+    return await this.chatService.getMessages(chat_id);
+  }
+
+  @Get('chats')
+  async getChats(@Query('user_one_id') user_one_id: number): Promise<Chat[]> {
+    return await this.chatService.getChats(user_one_id);
   }
 }

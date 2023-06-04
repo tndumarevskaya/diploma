@@ -12,6 +12,11 @@ export class CreateDonationDto {
   // @IsNotEmpty()
   // readonly date: Date;
 
+  @ApiProperty({ example: 1, description: 'Shelter ID of the donation' })
+  @IsNumber()
+  @IsNotEmpty()
+  readonly shelter_id: number;
+
   @ApiProperty({ example: 2300, description: 'Amount of the donation in rubles' })
   @IsNumber()
   @IsNotEmpty()

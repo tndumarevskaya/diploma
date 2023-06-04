@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Delete, Body, Query, Patch } from '@nestjs/common';
 import { VolunteerApplicationService } from './volunteer_application.service';
 import { CreateVolunteerApplicationDto } from './dto/create-volunteer-application.dto';
 import { VolunteerApplication } from './volunteer_application.model';
@@ -25,11 +25,24 @@ export class VolunteerApplicationController {
     return this.volunteerApplicationService.getVolunteerApplicationById(id);
   }
 
-  @ApiOperation({ summary: 'Get all volunteer applications' })
-  @ApiResponse({ status: 200, description: 'All volunteer applications have been successfully retrieved', type: [VolunteerApplication] })
+  @ApiOperation({ summary: 'Get all volunteer applications by shelter ID' })
+  @ApiResponse({ status: 200, description: 'All volunteer applications for the specified shelter have been successfully retrieved', type: [VolunteerApplication] })
   @Get()
-  getAllVolunteerApplications(): Promise<VolunteerApplication[]> {
-    return this.volunteerApplicationService.getAllVolunteerApplications();
+  getAllVolunteerApplications(
+    @Query('shelter_id') shelterId: number,
+    @Query('name') name: string,
+    @Query('status_id') statusId: number): Promise<VolunteerApplication[]> {
+  return this.volunteerApplicationService.getAllVolunteerApplications(shelterId, name, statusId);
+  }
+
+  @ApiOperation({ summary: 'Update the status of a volunteer application' })
+  @ApiResponse({ status: 200, description: 'The status of the volunteer application has been successfully updated', type: VolunteerApplication })
+  @Patch(':id')
+  updateVolunteerApplicationStatus(
+    @Param('id') id: number,
+    @Body('status_id') statusId: number,
+  ): Promise<VolunteerApplication> {
+    return this.volunteerApplicationService.updateStatus(id, statusId);
   }
 
   @ApiOperation({ summary: 'Delete a volunteer application by ID' })

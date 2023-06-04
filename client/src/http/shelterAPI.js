@@ -14,6 +14,7 @@ const updateShelter = async (id, data = {}, image) => {
           'Content-Type': 'multipart/form-data',
         },
       });
+      //localStorage.setItem('shelter', JSON.stringify(response.data));
       return response.data;
     } catch (error) {
       console.error(error);
@@ -24,6 +25,7 @@ const updateShelter = async (id, data = {}, image) => {
 const getShelterInfo = async (id) => {
     try {
       const response = await $host.get(`/shelter/${id}`, { headers: authHeader()});
+      localStorage.setItem('shelter', JSON.stringify(response.data));
       return response.data;
     } catch (error) {
       throw error;

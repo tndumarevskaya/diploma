@@ -22,18 +22,3 @@ h2 {
     margin-left: 12%;
     color: #083D77;
 }
-
-.tags {
-    display: flex;
-    gap: 16px;
-    margin: 1% 12% 2%;
-}
-
-.tag {
-    width: 134px;
-    padding: 14px;
-    background-color: #EBEBD3;
-    text-align: center;
-    border-radius: 20px;
-    color: #083D77;
-}

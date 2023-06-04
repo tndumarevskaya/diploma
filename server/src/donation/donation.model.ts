@@ -7,6 +7,10 @@ export class Donation extends Model<Donation> {
   @Column({ type: DataType.INTEGER, primaryKey: true, autoIncrement: true })
   donation_id: number;
 
+  @ApiProperty({ example: 1, description: 'Shelter ID of the donation' })
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  shelter_id: number;
+
   @ApiProperty({ example: 'Tatiana', description: 'Name of the donor' })
   @Column({ type: DataType.STRING, allowNull: false })
   name: string;

@@ -29,7 +29,7 @@ export class Message extends Model<Message> {
   // date_created: Date;
 
   @ApiProperty({ example: false, description: 'Is Read' })
-  @Column({ type: DataType.BOOLEAN, allowNull: false })
+  @Column({ type: DataType.BOOLEAN, defaultValue: false})
   is_read: boolean;
 
   @BelongsTo(() => User)

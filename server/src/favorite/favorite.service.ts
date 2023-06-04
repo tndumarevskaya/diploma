@@ -13,7 +13,7 @@ export class FavoriteService {
 
   async getAllFavorite(adopterId?: number): Promise<Favorite[]> {
     const whereCondition = adopterId ? { adopter_id: adopterId } : {};
-    return this.favoriteModel.findAll({ where: whereCondition });
+    return this.favoriteModel.findAll({ where: whereCondition, include: {all: true}});
   }
 
   async deleteFavorite(id: number): Promise<void> {

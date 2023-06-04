@@ -2,7 +2,7 @@
     display: flex;
     margin-top: 2%;
     justify-content: space-between;
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.05); 
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2); 
     padding: 2% 4%;
     border-radius: 20px;
 }

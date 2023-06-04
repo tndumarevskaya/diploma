@@ -1,0 +1,35 @@
+/* .volunteer-education-page {
+    height: 100%;
+} */
+.volunteer-education-page .educations {
+    background-color: white;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 4% 12%;
+    margin-top: 2%;
+    gap:2%;
+    background: linear-gradient(180deg, transparent 80%, white 20%);
+}
+
+.volunteer-education-page .educations .education{
+    flex: 0 0 48%;
+    height: 400px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+    padding: 36px;
+    padding-bottom: 40px;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1); 
+}
+
+.volunteer-education-page .educations .education img{
+    height: 300px;
+    width: inherit;
+    object-fit:contain;
+    width: fit-content;
+}

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Delete, Body, Query, Patch } from '@nestjs/common';
 import { AdopterApplicationService } from './adopter_application.service';
 import { CreateAdopterApplicationDto } from './dto/create-adopter-application.dto';
 import { AdopterApplication } from './adopter_application.model';
@@ -28,8 +28,22 @@ export class AdopterApplicationController {
   @ApiOperation({ summary: 'Get all adopter applications' })
   @ApiResponse({ status: 200, description: 'All adopter applications have been successfully retrieved', type: [AdopterApplication] })
   @Get()
-  getAllAdopterApplications(): Promise<AdopterApplication[]> {
-    return this.adopterApplicationService.getAllAdopterApplications();
+  getAllAdopterApplications(
+    @Query('shelter_id') shelterId: number,
+    @Query('name') name: string,
+    @Query('status_id') statusId: number
+    ): Promise<AdopterApplication[]> {
+    return this.adopterApplicationService.getAllAdopterApplications(shelterId, name, statusId);
+  }
+
+  @ApiOperation({ summary: 'Update the status of the application' })
+  @ApiResponse({ status: 200, description: 'The status of the application has been successfully updated', type: AdopterApplication })
+  @Patch(':id')
+  updateVolunteerApplicationStatus(
+    @Param('id') id: number,
+    @Body('status_id') statusId: number,
+  ): Promise<AdopterApplication> {
+    return this.adopterApplicationService.updateStatus(id, statusId);
   }
 
   @ApiOperation({ summary: 'Delete an adopter application by ID' })

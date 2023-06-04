@@ -14,17 +14,22 @@ import { useSelector } from 'react-redux';
 export default function ShelterVolunteer() {
   const navigate = useNavigate();
   const location = useLocation();
-  const shelter = useSelector(state => state.shelter);
+  const [shelter, setShelter] = useState({});
+ 
+
+  useEffect(() => {
+    setShelter(JSON.parse(localStorage.getItem('shelter')))
+  }, []);
 
   const renderComponent = () => {
     const { pathname } = location;
 
-    if (pathname === '/shelter/volunteer/chat') {
-      return <AllMessages />;
-    } else if (pathname.startsWith('/shelter/volunteer/chat/')) {
+    if (pathname === `/shelter/${shelter.id}/volunteer/chat`) {
+      return <AllMessages userId={shelter.id}/>;
+    } else if (pathname.startsWith( `/shelter/${shelter.id}/volunteer/chat`)) {
       return <DialogComponent />;
-    } else if (pathname === '/shelter/volunteer/application') {
-      return <AllApplications />;
+    } else if (pathname ===  `/shelter/${shelter.id}/volunteer/application`) {
+      return <AllApplications shelter_id={shelter.id}/>;
     } else {
       return null;
     }
@@ -41,10 +46,10 @@ export default function ShelterVolunteer() {
       <ProfileMenu />
       <div className='volunteer-page'>
         <div className='sidebar'>
-          <NavLink activeClassName="active" to='/shelter/volunteer/chat'>
+          <NavLink activeClassName="active" to={`/shelter/${shelter.id}/volunteer/chat`}>
             Чаты
           </NavLink>
-          <NavLink activeClassName="active" to='/shelter/volunteer/application'>
+          <NavLink activeClassName="active" to={`/shelter/${shelter.id}/volunteer/application`}>
             Заявки
           </NavLink>
         </div>

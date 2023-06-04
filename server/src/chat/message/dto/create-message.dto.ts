@@ -19,9 +19,4 @@ export class CreateMessageDto{
     // @ApiProperty({ example: '2023-03-01', description: 'Date Created' })
     // @Column({ type: DataType.DATE, allowNull: false })
     // date_created: Date;
-  
-    @ApiProperty({ example: false, description: 'Is Read' })
-    @IsBoolean()
-    is_read: boolean;
-  
 }

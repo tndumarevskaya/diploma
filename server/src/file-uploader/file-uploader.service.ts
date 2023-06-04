@@ -10,6 +10,7 @@ export class FileUploaderService {
     constructor(@Inject('FIREBASE') private readonly firebase: typeof admin) {}
 
     async uploadFile(file: Express.Multer.File): Promise<string> {
+        console.log(file);
         const bucket = admin.storage().bucket();
         const fileExtension = path.extname(file.originalname);
       

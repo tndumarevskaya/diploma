@@ -134,6 +134,18 @@ export class AdopterService {
         if (updateAdopterDto.additionalInfo) {
           adopter.additionalInfo = updateAdopterDto.additionalInfo;
         }
+
+        if (updateAdopterDto.social) {
+            adopter.social = updateAdopterDto.social;
+        }
+
+        if (updateAdopterDto.education) {
+            adopter.education = updateAdopterDto.education;
+        }
+
+        if (updateAdopterDto.education) {
+            adopter.work = updateAdopterDto.work;
+        }
     
         await adopter.save();
     

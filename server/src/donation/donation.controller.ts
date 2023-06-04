@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Donation } from './donation.model';
 import { DonationService } from './donation.service';
@@ -19,8 +19,8 @@ export class DonationController {
   @ApiOperation({ summary: 'Get all donations' })
   @ApiResponse({ status: 200, description: 'Returns an array of donation', type: [Donation] })
   @Get()
-  getAllDonation(): Promise<Donation[]> {
-    return this.donationService.getAllDonation();
+  getAllDonation(@Query('shelter_id') shelter_id: number): Promise<Donation[]> {
+    return this.donationService.getAllDonation(shelter_id);
   }
 
   @ApiOperation({ summary: 'Get donation by ID' })

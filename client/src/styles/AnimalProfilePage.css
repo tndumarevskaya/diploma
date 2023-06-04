@@ -1,0 +1,19 @@
+.animal-profile-page .animal-profile .animal-picture {
+    border: none;
+}
+
+.animal-shelter .shelter-profile-component {
+    margin: 2% 12%;
+}
+
+.animal-profile-page .adoption-button{
+   width: 74%;
+   box-sizing: content-box;
+   padding: 20px 36px;
+}
+
+.animal-profile-page .adoption-buttons {
+    display: flex;
+    margin: 2% 12%;
+    gap: 2%;
+}

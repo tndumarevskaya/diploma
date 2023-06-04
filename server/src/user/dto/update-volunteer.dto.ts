@@ -30,6 +30,21 @@ export class UpdateVolunteerDto {
     @IsPhoneNumber('RU', { message: 'Invalid phone number' })
     readonly phoneNumber?: string;
    
+    @ApiProperty({example: 'Школа № 1', description: 'Volunteer education'})
+    @IsOptional()
+    @IsString()
+    readonly education?: string;
+
+    @ApiProperty({example: 'ООО Организация', description: 'Volunteer work'})
+    @IsOptional()
+    @IsString()
+    readonly work?: string;
+
+    @ApiProperty({example: 'VK: https://vk.com/bfsostradanie', description: 'Socials'})
+    @IsOptional()
+    @IsString()
+    readonly social?: string;
+
     @ApiProperty({example: 'Additional information', description: 'Additional information'})
     @IsOptional()
     @IsString({ message: 'Additional information should be a string' })

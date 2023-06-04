@@ -32,8 +32,18 @@ export class UpdateShelterDto {
     @ApiProperty({ example: '09:00 - 17:00, 10:00 - 18:00', description: 'The schedule of the shelter' })
     @IsOptional()
     @IsString()
-    @Validate(ScheduleValidator)
+    // @Validate(ScheduleValidator)
     readonly schedule?: string;
+
+    @ApiProperty({example: 'VK: https://vk.com/bfsostradanie', description: 'Socials'})
+    @IsOptional()
+    @IsString()
+    readonly social?: string;
+
+    @ApiProperty({example: 'Мы благотворительный фонд', description: 'Описание прибта'})
+    @IsOptional()
+    @IsString()
+    readonly about?: string;
 
     @ApiProperty({example: 'Additional information', description: 'Additional information'})
     @IsOptional()

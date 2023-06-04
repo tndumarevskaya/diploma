@@ -1,28 +1,52 @@
-import { WebSocketGateway, WebSocketServer, OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
+import {
+  ConnectedSocket,
+  MessageBody,
+  OnGatewayInit,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { UserService } from '../user/user.service';
+import { ChatService } from './chat.service';
+import { CreateMessageDto } from './message/dto/create-message.dto';
+import { Logger } from '@nestjs/common';
+import { CreateChatDto } from './dto/create-chat.dto';
 
-@WebSocketGateway()
-export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
+
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+  },
+})
+export class ChatGateway {
   @WebSocketServer()
-  server: Server;
+  private server: Server;
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private chatService: ChatService) {}
 
-  async handleConnection(client: Socket, ...args: any[]) {
-    const userId = Number(client.handshake.query.userId);
-    const user = await this.userService.getUserById(userId);
-    if (!user) {
-      client.disconnect(true);
-    } else {
-      client.join(user.id.toString());
-    }
+
+  @SubscribeMessage('createMessage')
+  async createMessage(
+    @MessageBody() payload: CreateMessageDto,
+    @ConnectedSocket() client: Socket,
+  ) {
+    const message = await this.chatService.postMessage(payload);
+    this.server.emit('message', message);
+    return message;
   }
 
-  handleDisconnect(client: Socket) {
-    client.leave(client.id);
+  @SubscribeMessage('findAllMessages')
+  async findAllMessages(@MessageBody() chat_id: number) {
+    return await this.chatService.getMessages(chat_id);
+  }
+
+  @SubscribeMessage('findAllChats')
+  async findAllChats(@MessageBody() user_one_id: number) {
+    return await this.chatService.getChats(user_one_id);
+  }
+
+  @SubscribeMessage('join')
+  async joinRoom(@MessageBody() payload: CreateChatDto) {
+    return await this.chatService.createChat(payload);
   }
 }
-
-
-

@@ -44,12 +44,12 @@ export class User<T> extends Model<T, AdopterCreationAttrs | VolunteerCreationAt
     @Column({type: DataType.STRING})
     phoneNumber: string;
 
-    // @ApiProperty({example: 'VK: https://vk.com/bfsostradanie', description: 'Socials'})
-    // @Column({type: DataType.STRING})
-    // social: string;
+    @ApiProperty({example: 'VK: https://vk.com/bfsostradanie', description: 'Socials'})
+    @Column({type: DataType.STRING})
+    social: string;
 
     @ApiProperty({example: 'Additional information', description: 'Additional information'})
-    @Column({type: DataType.STRING})
+    @Column({type: DataType.TEXT})
     additionalInfo: string;
 
     @ApiProperty({example: 'Additional information', description: 'Additional information'})
@@ -75,6 +75,14 @@ export class Volunteer extends User<Volunteer>{
     @ApiProperty({example: '23', description: 'Volunteer age'})
     @Column({type: DataType.INTEGER})
     age: number;
+
+    @ApiProperty({example: 'Школа № 1', description: 'Volunteer education'})
+    @Column({type: DataType.STRING})
+    education: string;
+
+    @ApiProperty({example: 'ООО Организация', description: 'Volunteer work'})
+    @Column({type: DataType.STRING})
+    work: string;
 }
 
 @Table({tableName: 'adopter'})
@@ -91,6 +99,14 @@ export class Adopter extends User<Adopter> {
     @ApiProperty({example: '23', description: 'Adopter age'})
     @Column({type: DataType.INTEGER})
     age: number;
+
+    @ApiProperty({example: 'Школа № 1', description: 'Adopter education'})
+    @Column({type: DataType.STRING})
+    education: string;
+
+    @ApiProperty({example: 'ООО Организация', description: 'Adopter work'})
+    @Column({type: DataType.STRING})
+    work: string;
 }
 
 @Table({tableName: 'shelter'})
@@ -107,4 +123,8 @@ export class Shelter extends User<Shelter>{
     @ApiProperty({example: '09:00 - 17:00, 10:00 - 18:00', description: 'The schedule of the shelter'})
     @Column({type: DataType.STRING})
     schedule: string;
+
+    @ApiProperty({example: 'Мы благотворительный фонд', description: 'Описание прибта'})
+    @Column({type: DataType.TEXT})
+    about: string;
 }

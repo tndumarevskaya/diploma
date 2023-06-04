@@ -15,8 +15,8 @@ export class DonationService {
     return await this.donationModel.create(dto);
   }
 
-  async getAllDonation(): Promise<Donation[]> {
-    return await this.donationModel.findAll();
+  async getAllDonation(shelter_id): Promise<Donation[]> {
+    return await this.donationModel.findAll({where: shelter_id});
   }
 
   async getDonationById(id: number): Promise<Donation> {

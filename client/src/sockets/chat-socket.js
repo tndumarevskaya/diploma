@@ -1,31 +1,25 @@
-const io = require('socket.io-client');
-let socket = null;
+import { io } from 'socket.io-client';
 
-function connect() {
-  socket = io('http://localhost:8000', { query: { userId, token } });
+const socket = io(process.env.REACT_APP_API_URL);
 
-  socket.on('connect', () => {
-    console.log('Connected to the server');
+export const joinRoom = (chatId) => {
+  socket.emit('join', chatId);
+};
+
+export const sendMessage = (messageData) => {
+  socket.emit('createMessage', messageData);
+};
+
+export const getMessages = (chatId, callback) => {
+  socket.emit('findAllMessages', chatId, (response) => {
+    callback(response);
   });
+};
 
-  socket.on('disconnect', () => {
-    console.log('Disconnected from the server');
+export const getChats = (userId, callback) => {
+  socket.emit('findAllChats', userId, (response) => {
+    callback(response);
   });
+};
 
-  socket.on('msgToClient', (message) => {
-    console.log('New Message: ', message);
-  });
-}
-
-function sendMessage(message) {
-  if (!socket) {
-    console.log('Not connected to the server');
-    return;
-  }
-
-  socket.emit('msgToServer', { text: message });
-}
-
-connect();
-
-module.exports = { sendMessage };
+export default socket;

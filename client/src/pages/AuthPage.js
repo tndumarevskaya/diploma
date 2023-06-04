@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/Auth.css';
-import { ADOPTER_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHELTER_ROUTE, VOLUNTEER_ROUTE } from '../utils/const';
+import { ADOPTER_ROUTE, ANIMAL_CATALOG_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHELTER_ROUTE, VOLUNTEER_ROUTE } from '../utils/const';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { registerShelter, registerVolunteer, registerAdopter, loginShelter, loginVolunteer, loginAdopter} from "../actions/auth";
 import { getShelter } from '../actions/shelter';
@@ -82,7 +82,7 @@ function AuthPage() {
           .then(() => {
             console.log("ok")
             const userId = JSON.parse(localStorage.getItem('user')).id;
-            navigate(ADOPTER_ROUTE + "/" + userId);
+            navigate(ANIMAL_CATALOG_ROUTE);
           })
           .catch(() => {
             console.log(message);
@@ -124,7 +124,7 @@ function AuthPage() {
         .then(() => {
           console.log("ok")
           const userId = JSON.parse(localStorage.getItem('user')).id;
-          navigate(ADOPTER_ROUTE + "/" + userId);
+          navigate(ANIMAL_CATALOG_ROUTE);
         })
         .catch(() => {
           console.log(message);

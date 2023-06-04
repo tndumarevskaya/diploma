@@ -1,0 +1,21 @@
+.article-component {
+    margin: 3% 12%;
+}
+
+.article-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+
+.article-content img {
+    width: 700px;
+    border-radius: 10px;
+    margin: 6% 0%;
+}
+
+.article-content h2 {
+    margin: 0;
+}

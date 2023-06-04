@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString, IsInt, Min, Max, IsPhoneNumber, IsUrl } from "class-validator";
 
 export class UpdateAdopterDto {
-    
+
     @ApiProperty({ example: 'https://example.com/path/to/image.jpg', description: 'Image URL' })
     @IsOptional()
     @IsUrl({}, { message: 'Invalid image URL' })
@@ -30,6 +30,21 @@ export class UpdateAdopterDto {
     @IsPhoneNumber('RU', { message: 'Invalid phone number' })
     readonly phoneNumber?: string;
    
+    @ApiProperty({example: 'Школа № 1', description: 'Adopter education'})
+    @IsOptional()
+    @IsString()
+    readonly education?: string;
+
+    @ApiProperty({example: 'ООО Организация', description: 'Adopter work'})
+    @IsOptional()
+    @IsString()
+    readonly work?: string;
+
+    @ApiProperty({example: 'VK: https://vk.com/bfsostradanie', description: 'Socials'})
+    @IsOptional()
+    @IsString()
+    readonly social?: string;
+
     @ApiProperty({example: 'Additional information', description: 'Additional information'})
     @IsOptional()
     @IsString({ message: 'Additional information should be a string' })
