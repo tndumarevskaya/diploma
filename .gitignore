@@ -4,6 +4,7 @@ dist/
 .env
 .env.local
 .development.env
+.producation.evn
 # Client files
 client/node_modules/
 client/build/
