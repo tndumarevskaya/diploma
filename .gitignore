@@ -3,7 +3,7 @@ node_modules/
 dist/
 .env
 .env.local
-
+.development.env
 # Client files
 client/node_modules/
 client/build/
