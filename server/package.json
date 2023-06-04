@@ -45,7 +45,8 @@
     "sequelize": "^6.31.0",
     "sequelize-typescript": "^2.1.5",
     "socket.io": "^4.6.1",
-    "swagger-ui-express": "^4.6.2"
+    "swagger-ui-express": "^4.6.2",
+    "webpack": "^5.85.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
