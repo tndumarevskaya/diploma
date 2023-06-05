@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-const socket = io(process.env.REACT_APP_API_URL);
+const socket = io("https://animal-shelter.onrender.com");
 
 export const joinRoom = (chatId) => {
   socket.emit('join', chatId);
